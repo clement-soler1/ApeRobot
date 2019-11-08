@@ -1,8 +1,7 @@
-.brandName {
+.brand-logo {
 	text-align: center;
     font-family: monospace;
-    font-size: 2.1rem;
-    padding-left: 40%;
+    font-size: 200%;
 }
 
 .brandIcon {
@@ -17,16 +16,17 @@
 }
 
 .imgDiapo {
-	margin-left: calc(50% - 70vh); /* 100% - 140vh / 2 */
+	margin-top: 1%;
+	margin-left: calc(50% - 68vh);
 	height: 70vh;
 	width: auto;
+	padding-bottom: 3%;
 	
 }
 
-.d > h2 {
+.d > h3 {
 	margin-top: 0px;
 	text-align: center;
-	padding-top: 3%;
 }
 
 .d > p {
@@ -44,18 +44,6 @@
 	flex-direction: row;
 }
 
-.szComp {
-	margin-left: 15%;
-	width: 30%;
-	height: auto;
-}
-
-.txComp {
-	margin-left: 10%;
-	width: 35%;
-	font-size: 1.2vw;
-}
-
 @media (max-width: 1000px) {
 	.imgDiapo {
 		display: none;
@@ -69,4 +57,17 @@
 
 .miniName {
 	margin-top: 5vw;
+}
+
+.cornered{
+	border-radius: 10px !important;
+}
+
+.bigger{
+	text-align: justify;
+	font-size: 130%;
+}
+
+.darkmode{
+	background-color: #121212 !important;
 }
