@@ -1,0 +1,73 @@
+.brand-logo {
+	text-align: center;
+    font-family: monospace;
+    font-size: 200%;
+}
+
+.brandIcon {
+	height: 5rem;
+	width: auto;
+}
+
+@media (max-width: 1000px) {
+	.brandIcon {
+  		display: none !important;
+	}
+}
+
+.imgDiapo {
+	margin-top: 1%;
+	margin-left: calc(50% - 68vh);
+	height: 70vh;
+	width: auto;
+	padding-bottom: 3%;
+	
+}
+
+.d > h3 {
+	margin-top: 0px;
+	text-align: center;
+}
+
+.d > p {
+	padding-top: 3%;
+	margin-left: 5%;
+	margin-right: 5%;
+	font-size: 1.5rem;
+	padding-bottom: 3%;
+}
+
+.flexContent {
+	margin-top: 5vh;
+	padding-bottom: 5vh;
+	display: flex;
+	flex-direction: row;
+}
+
+@media (max-width: 1000px) {
+	.imgDiapo {
+		display: none;
+	}
+}
+
+.miniLogo {
+	width: 20vw;
+	margin-bottom: 5vw;
+}
+
+.miniName {
+	margin-top: 5vw;
+}
+
+.cornered{
+	border-radius: 10px !important;
+}
+
+.bigger{
+	text-align: justify;
+	font-size: 130%;
+}
+
+.darkmode{
+	background-color: #121212 !important;
+}
