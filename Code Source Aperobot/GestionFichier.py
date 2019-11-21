@@ -7,7 +7,6 @@ import GestionBDD as BDD
 
 def __is_connected():
     try:
-        # ping un site pour savoir si une connection internet est presente
         socket.create_connection(("www.google.com", 80))
         return True
     except OSError:
@@ -27,51 +26,50 @@ def __delete_old_data():
                 print('Deleted: %s' % (file))
 
 
-def __saveDataLocalToTransferLater(listOfDataSensor):
+def __saveDataLocalToTransferLater(listOfSensor):
     if not os.path.isdir('./DataToTransfer'):
         os.makedirs('./DataToTransfer')
     file = open("./DataToTransfer/dataToTransfer.sql","a")
     reslt = ""
-    for dataSensor in listOfDataSensor:
-        reslt += dataSensor.getDataInFormatSQL() + '\n'
+    for sensor in listOfSensor:
+        reslt += sensor.getListDataInFormatSQL() + '\n'
     file.write(reslt)
+    file.close()
 
 
-def __saveDataInBDD(listOfDataSensor):
+def __saveDataInBDD(listOfSensor):
     listOfQuery = ""
-#    for sensor in listOfDataSensor:
-    for data in listOfDataSensor[0]: #sensor:
-        listOfQuery += data.getDataInFormatSQL()
-#    #print(listOfQuery)
-#    listOfQuery = "INSERT INTO `Ap_Accelerometer`(`idAccelerometer`, `date`, `time`, `X`, `Y`, `Z`) VALUES (1,'2019-11-07','12:21:12',0,0,0)"
-    BDD.sendQuery(listOfQuery)
+    for sensor in listOfSensor:
+        listOfQuery += sensor.getListDataInFormatSQL()
+#    print(listOfQuery)
+#    BDD.sendQuery(listOfQuery)
 
 
-def __saveDataLocal(listOfDataSensor):
+def __saveDataLocal(listOfSensor):
     if not os.path.isdir('./Data'):
         os.makedirs('./Data')
     __delete_old_data()
     date_of_today = date.datetime.now().strftime('%d-%m-%Y')
     file = open("./Data/data_" + date_of_today + ".txt","a")
     reslt = ""
-    for sensor in listOfDataSensor:
-        for data in sensor:
-            reslt += data.getDataInFormatTXT() + '\n'
-    reslt += '\n'
+    for sensor in listOfSensor:
+        reslt += sensor.getListDataInFormatTXT()
     file.write(reslt)
-    #print("data : \n" + reslt)
+    file.close()
+#    print("data : \n" + reslt)
 
 
 
-def saveData(listOfDataSensor):
+def saveData(listOfSensor):
     if __is_connected():
-        __saveDataInBDD(listOfDataSensor)
+        __saveDataInBDD(listOfSensor)
+        __saveIfNeeded()
     else :
-        __saveDataLocalToTransferLater(listOfDataSensor)
-    __saveDataLocal(listOfDataSensor)
+        __saveDataLocalToTransferLater(listOfSensor)
+    __saveDataLocal(listOfSensor)
 
 
-def saveIfNeeded():
-    if __is_connected() and os.path.exists("./DataToTransfer/dataToTransfer.sql"):
+def __saveIfNeeded():
+    if os.path.exists("./DataToTransfer/dataToTransfer.sql"):
         BDD.sendFile("./DataToTransfer/dataToTransfer.sql")
         os.remove("./DataToTransfer/dataToTransfer.sql")
