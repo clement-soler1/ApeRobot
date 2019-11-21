@@ -1,0 +1,93 @@
+.brand-logo {
+	text-align: center;
+    font-family: monospace;
+    font-size: 200%;
+}
+
+.brandIcon {
+	height: 5rem;
+	width: auto;
+}
+
+@media (max-width: 1000px) {
+	.brandIcon {
+  		display: none !important;
+	}
+}
+
+.imgDiapo {
+	margin-top: 1%;
+	margin-left: calc(50% - 68vh);
+	height: 70vh;
+	width: auto;
+	padding-bottom: 3%;
+	
+}
+
+.d > h3 {
+	padding-top: 5px
+	margin-top: 0px;
+	text-align: center;
+	color: #000;
+	font-weight: bold;
+	font-family: Helvetica;
+	text-shadow:0 1px 0 #ccc,
+		0 2px 0 #c9c9c9,
+		0 3px 0 #bbb,
+		0 4px 0 #b9b9b9,
+		0 5px 0 #aaa,
+		0 6px 1px rgba(0,0,0,.1),
+		0 0 5px rgba(0,0,0,.1),
+		0 1px 3px rgba(0,0,0,.3),
+		0 3px 5px rgba(0,0,0,.2),
+		0 5px 10px rgba(0,0,0,.25),
+		0 10px 10px rgba(0,0,0,.2),
+		0 20px 20px rgba(0,0,0,.15);
+}
+
+.d > p {
+	padding-top: 3%;
+	margin-left: 5%;
+	margin-right: 5%;
+	font-size: 1.5rem;
+	padding-bottom: 3%;
+}
+
+.flexContent {
+	margin-top: 5vh;
+	padding-bottom: 5vh;
+	display: flex;
+	flex-direction: row;
+}
+
+@media (max-width: 1000px) {
+	.imgDiapo {
+		display: none;
+	}
+}
+
+.miniLogo {
+	width: 20vw;
+	margin-bottom: 5vw;
+}
+
+.miniName {
+	margin-top: 5vw;
+}
+
+.cornered{
+	border-radius: 10px !important;
+}
+
+.cornered img {
+	max-height: 550px;
+}
+
+.bigger{
+	text-align: justify;
+	font-size: 130%;
+}
+
+.darkmode{
+	background-color: #121212 !important;
+}
