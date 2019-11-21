@@ -10,9 +10,11 @@
 
 	<div id="myLI" class="login">
 		<h1>Connexion</h1>
-	    <form method="post">
+                <form action="index.php?" method="post">
 	    	<input type="text" name="email" placeholder="Email" required="required" />
 	        <input type="password" name="pwd" placeholder="Mot de passe" required="required" />
+                <input type="hidden" name="controller" value="user"/>
+                <input type="hidden" name="action" value="connectUser"/>
 	        <button type="submit" class="btn btn-primary btn-block btn-large">Connexion</button>
 	    </form>
 	    <p>vous ne possedez pas de compte ? <a href="#" onclick="javascript:switchInscri()" class="link">S'inscrire</a></p>
@@ -20,14 +22,16 @@
 
 	<div id="mySI" class="signin hide">
 		<h1>Inscription</h1>
-	    <form method="post">
+	    <form action="index.php?" method="post">
 	    	<input type="text" name="email" placeholder="Email" required="required" />
-	        <input type="password" name="pwd" placeholder="Mot de passe" required="required" />
-	        <input type="password" name="pwd2" placeholder="Confirmation Mot de passe" required="required" />
+	        <input id="password" type="password" name="pwd" placeholder="Mot de passe" required="required" />
+	        <input id="confirm_password" type="password" name="pwd2" placeholder="Confirmation Mot de passe" required="required" />
 	        <input type="text" name="nom" placeholder="Nom" required="required" />
 	        <input type="text" name="prenom" placeholder="Prénom" required="required" />
 	        <input type="date" name="dob" placeholder="Date de Naissance" required="required" />
 	        <input type="text" name="tel" placeholder="N° Téléphone" required="required" />
+                <input type="hidden" name="controller" value="user"/>
+                <input type="hidden" name="action" value="createUser"/>
 	        <button type="submit" class="btn btn-primary btn-block btn-large">S'incrire</button>
 	    </form>
 	    <p>vous possedez déjà un compte ? <a href="#" onclick="javascript:switchConnect()" class="link">Se connecter</a></p>

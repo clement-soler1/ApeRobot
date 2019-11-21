@@ -1,17 +1,17 @@
 <?php
 require_once File::build_path(array("controller","ControllerUser.php"));
 
-if (isset($_GET['action'])) {
+if (isset($_REQUEST['action'])) {
 // On recupère l'action passée dans l'URL
-    $action = $_GET['action'];
+    $action = $_REQUEST['action'];
 } else {
     //$action = "readAll";
     $action = "login";
 }
 
-if (isset($_GET['controller'])) {
+if (isset($_REQUEST['controller'])) {
 // On recupère l'action passée dans l'URL
-    $controller = $_GET['controller'];
+    $controller = $_REQUEST['controller'];
 } else {
     $controller = 'user';
 }

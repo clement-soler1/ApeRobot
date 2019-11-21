@@ -1,9 +1,9 @@
 <head>
   <title>Apérobot - Dashboard</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="./css/entypo.css">
-  <link rel="stylesheet" type="text/css" href="./css/mainView.css">
-  <script type="text/javascript" src="./js/mainView.js"></script>
+  <link rel="stylesheet" type="text/css" href="./view/css/entypo.css">
+  <link rel="stylesheet" type="text/css" href="./view/css/mainView.css">
+  <script type="text/javascript" src="./view/js/mainView.js"></script>
 </head>
 
 <body>
@@ -30,17 +30,19 @@
       </ul>
     </nav>
   </header>
-  <main>
-    <div class="title">
-      <h2>Projects</h2>
-      <div class="flexRow">
-      <a href="" class="btnNav2"><i class="material-icons">brightness_6</i></a>
-      <a href="" class="btnNav2"><i class="material-icons">build</i></a>
-      <a href="" class="btnNav"><i class="material-icons">person</i>Hello Clément</a>
-    </div>
-    </div>
+  <?php
+  echo '<main>';
+    echo '<div class="title">';
+      echo '<h2>'. $section_title .'</h2>';
+      echo '<div class="flexRow">';
+      echo '<a href="" class="btnNav2"><i class="material-icons">brightness_6</i></a>';
+      echo '<a href="" class="btnNav2"><i class="material-icons">build</i></a>';
+      echo '<a href="" class="btnNav"><i class="material-icons">person</i>Hello '. $user->getPrenom() .'</a>';
+    echo '</div>';
+    echo '</div>';
     
 
     
-  </main>
+  echo '</main>';
+  ?>
 </body>

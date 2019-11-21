@@ -5,9 +5,10 @@
         <group>
             <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/view/login.php</file>
             <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/controller/ControllerUser.php</file>
+            <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/model/ModelUser.php</file>
             <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/index.php</file>
-            <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/controller/routeur.php</file>
-            <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/config/Conf.php</file>
+            <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/controller/ControllerDashboard.php</file>
+            <file>file:/home/ann2/solerc/public_html/ProjetS3/dashboard/view/mainView.php</file>
         </group>
     </open-files>
 </project-private>
