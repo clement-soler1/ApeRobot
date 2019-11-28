@@ -60,7 +60,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	left: 45%;
 	margin: -150px 0 0 -150px;
 	width:25vw;
-	background: rgba(0,0,0,0.3);
+	background: rgba(0,0,0,0.95);
 	padding: 2vw;
 }
 .signin h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
@@ -70,5 +70,9 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 }
 
 .link {
-	color: blue;
+	color: orangered;
+}
+
+.txtS {
+    color: white;
 }

@@ -17,7 +17,7 @@
                 <input type="hidden" name="action" value="connectUser"/>
 	        <button type="submit" class="btn btn-primary btn-block btn-large">Connexion</button>
 	    </form>
-	    <p>vous ne possedez pas de compte ? <a href="#" onclick="javascript:switchInscri()" class="link">S'inscrire</a></p>
+	    <p class="txtS">vous ne possedez pas de compte ? <a href="#" onclick="javascript:switchInscri()" class="link">S'inscrire</a></p>
 	</div>
 
 	<div id="mySI" class="signin hide">
@@ -34,7 +34,7 @@
                 <input type="hidden" name="action" value="createUser"/>
 	        <button type="submit" class="btn btn-primary btn-block btn-large">S'incrire</button>
 	    </form>
-	    <p>vous possedez déjà un compte ? <a href="#" onclick="javascript:switchConnect()" class="link">Se connecter</a></p>
+	    <p class="txtS">vous possedez déjà un compte ? <a href="#" onclick="javascript:switchConnect()" class="link">Se connecter</a></p>
 	</div>
 
 

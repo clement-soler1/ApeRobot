@@ -41,7 +41,7 @@
     echo '</div>';
     echo '</div>';
     
-
+    require File::build_path(array('view','dashboard',$view));
     
   echo '</main>';
   ?>
