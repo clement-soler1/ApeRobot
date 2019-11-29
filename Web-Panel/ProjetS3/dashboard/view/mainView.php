@@ -13,7 +13,7 @@
     <nav>
       <ul>
         <li>
-          <a href="#;" data-title="Projects">Acceuil</a>
+          <a href="#;" data-title="Projects">Accueil</a>
         </li>
         <li>
           <a href="#" class="entypo-home">Alertes</a>
