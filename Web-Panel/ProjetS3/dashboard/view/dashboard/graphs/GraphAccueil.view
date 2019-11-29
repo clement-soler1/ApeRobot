@@ -1,0 +1,4 @@
+<?php
+    \koolreport\widgets\koolphp\Table::create(array(
+        "dataSource"=>$this->dataStore("result")));
+?>

@@ -1,9 +1,11 @@
 <?php
-    require_once "../load.koolreport.php";
+
+    require File::build_path(array('view','dashboard','load.koolreport.php'));
+    require File::build_path(array('view', 'dashboard','graphs', 'koolreport','core', 'src', 'KoolReport.php'));
+
     class GraphAccueil extends \koolreport\KoolReport {
-        
-        
-        protected function settings() {
+                
+        public function settings() {
             return array(
                 "dataSources"=>array(
                     "automaker"=>array(
@@ -16,21 +18,11 @@
             );
         }
         
-        protected function setup() {
-            $sql = "SELECT *"
-                    . "FROM table"
-                    . "WHERE arg1=:tag_arg1 AND arg2=:tag_arg2";
-            $req_prep = Model::$pdo->prepare($sql);
-            
-            $values = array(
-                "tag_arg1" => $this->arg1,
-                "tag_arg2" => $this->arg2,
-            );
-
-            $req_prep->execute($values);
-                $this->src("automaker")
-                        ->query($req_prep)
-                        ->pipe($this->dataStore("result"));
+        public function setup() {
+            $sql = "SELECT dateNaissance FROM Ap_User";
+            $this->src("automaker")
+                    ->query($sql)
+                    ->pipe($this->dataStore("result"));
         }
     }
 ?>
