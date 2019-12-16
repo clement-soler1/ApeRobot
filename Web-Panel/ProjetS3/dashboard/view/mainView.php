@@ -27,7 +27,7 @@
           <a href="#" data-title="Diary">Données</a>
         </li>
         <li>
-          <a href="#" data-title="Timeline">Véhicules</a>
+          <a href="index.php?controller=dashboard&action=vehicule" data-title="Timeline">Véhicule</a>
         </li>
         <li>
           <a href="#" data-title="Settings">Paramètres</a>

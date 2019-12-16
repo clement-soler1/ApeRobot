@@ -28,5 +28,12 @@ class ControllerDashboard {
         ControllerDashboard::alert();
         
     }
+
+    public static function vehicule() {
+        $section_title = 'Acceuil';
+        $view = 'vehicule.php';
+        $SESSION['curAct'] = "vehicule";
+        require File::build_path(array('view','mainView.php'));
+    }
 }
 ?>
