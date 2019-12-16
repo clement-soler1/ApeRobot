@@ -1,0 +1,74 @@
+.alertContainerMain {
+    width: 100%;
+    overflow: scroll;
+    height: calc(100vh - 60px);
+}
+
+.alerte {
+        margin-left: 7vw;
+        margin-top: 3vw;
+	width: 70vw;
+	height: 11vw;
+	border-radius: 1vw;
+	display: flex;
+	flex-direction: row;
+}
+
+.alerteRouge {
+	background-color: #F00;
+}
+
+.alerteOrange {
+	background-color: #F60;
+}
+
+.alerteJaune {
+	background-color: #FC0;
+}
+
+.alerteVerte {
+	background-color: #090;
+}
+
+.iconAlerte {
+	margin-top: 1vw;
+	width: 8vw;
+	height: 8vw;
+}
+
+.titreAlerte {
+	color: white;
+	text-align: center;
+	font-size: 1.5vw;
+	margin-top: 0.5vw;
+	margin-bottom: 0px;
+}
+
+.textAlerte {
+	margin-top: 0px;
+	color: white;
+	font-size: 1.2vw;
+	width: 54vw;
+}
+
+.txtContainerAlerte {
+	width: 54vw;
+        text-align: center;
+}
+
+.alerteJaune > div > p {
+	color: black !important;
+}
+
+.alerteVerte > div > p {
+	color: black !important;
+}
+
+.timeAlerte {
+	color: white;
+	margin-top: 0px;
+	font-size: 0.8rem;
+	text-align: center;
+	font-style: oblique;
+
+}

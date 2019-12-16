@@ -10,6 +10,11 @@
 
 	<div id="myLI" class="login">
 		<h1>Connexion</h1>
+                <?php
+                    if (!is_null($type) && $type == "connexion") {
+                        echo '<p style="color : red;">'.$msg.'</p>';
+                    }
+                ?>
                 <form action="index.php?" method="post">
 	    	<input type="text" name="email" placeholder="Email" required="required" />
 	        <input type="password" name="pwd" placeholder="Mot de passe" required="required" />
@@ -22,6 +27,11 @@
 
 	<div id="mySI" class="signin hide">
 		<h1>Inscription</h1>
+                <?php
+                    if (!is_null($type) && $type == "inscription") {
+                        echo '<p style="color : red;">'.$msg.'</p>';
+                    }
+                ?>
 	    <form action="index.php?" method="post">
 	    	<input type="text" name="email" placeholder="Email" required="required" />
 	        <input id="password" type="password" name="pwd" placeholder="Mot de passe" required="required" />
@@ -42,4 +52,9 @@
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="./view/js/login.js"></script>
+        <?php
+            if (!is_null($type) && $type == "inscription") {
+                echo '<script>javascript:switchInscri()</script>';
+            }
+        ?>
 </body>

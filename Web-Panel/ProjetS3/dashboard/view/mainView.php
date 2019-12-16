@@ -1,9 +1,14 @@
+<?php
+    require_once File::build_path(array("model","ModelVehicule.php"));
+?>
+
 <head>
   <title>Apérobot - Dashboard</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./view/css/entypo.css">
   <link rel="stylesheet" type="text/css" href="./view/css/mainView.css">
   <script type="text/javascript" src="./view/js/mainView.js"></script>
+  <script type="text/javascript" src="./view/js/action.js"></script>
 </head>
 
 <body>
@@ -13,10 +18,10 @@
     <nav>
       <ul>
         <li>
-          <a href="#;" data-title="Projects">Accueil</a>
+          <a href="index.php?controller=dashboard&action=home" data-title="Projects">Acceuil</a>
         </li>
         <li>
-          <a href="#" class="entypo-home">Alertes</a>
+          <a href="index.php?controller=dashboard&action=alert" class="entypo-home">Alertes</a>
         </li>
         <li>
           <a href="#" data-title="Diary">Données</a>
@@ -35,9 +40,21 @@
     echo '<div class="title">';
       echo '<h2>'. $section_title .'</h2>';
       echo '<div class="flexRow">';
-      echo '<a href="" class="btnNav2"><i class="material-icons">brightness_6</i></a>';
-      echo '<a href="" class="btnNav2"><i class="material-icons">build</i></a>';
-      echo '<a href="" class="btnNav"><i class="material-icons">person</i>Hello '. $user->getPrenom() .'</a>';
+      echo '<select onchange=\'setCurVeh(this.value,'. $SESSION['curAct'] .')\' class="selVeh">';
+            $tav = ModelVehicule::getVehicleByPossesors($_SESSION["userID"]);
+            foreach ($tav as $v) {
+                if ($v->getIdVehicule() == $_SESSION['idv']) {
+                    echo '<option selected value="'. $v->getIdVehicule() .'">'. $v->getSurnom() .'</option>';
+                } else {
+                    echo '<option value="'. $v->getIdVehicule() .'">'. $v->getSurnom() .'</option>';
+                }
+            }
+      
+        
+      echo '</select>';
+      
+      $usr = ModelUser::getUserByEmail($_SESSION['userEmail']);
+      echo '<a href="" class="btnNav"><i class="material-icons">person</i>Hello '. $usr->getPrenom() .'</a>';
     echo '</div>';
     echo '</div>';
     

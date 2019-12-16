@@ -104,13 +104,6 @@ class ModelUser {
         $req_prep->setFetchMode(PDO::FETCH_NUM);
         $res = $req_prep->fetch();
         
-        /*
-        if ($res[0]) {
-            echo 'user exist';
-        } else {
-            echo 'no user with those statements';
-        }*/
-        
         return ($res[0] != 0);
         
     }
@@ -127,7 +120,27 @@ class ModelUser {
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUser');
         $tab = $req_prep->fetchAll();
         
-        return ($tab[0]);
+        if (count($tab) > 0) {
+            return ($tab[0]);
+        }else {
+            return null;
+        }
+    }
+    
+    public function getUserID() {
+        $sql = "SELECT idUser FROM Ap_User WHERE email=:tag_email";
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "tag_email" => $this->email,
+        );
+        $req_prep->execute($values);
+        $req_prep->setFetchMode(PDO::FETCH_NUM);
+        $tab = $req_prep->fetch();
+        
+        return $tab[0];
+        
+        
     }
 
     

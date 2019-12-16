@@ -199,6 +199,7 @@ a:hover {
   margin-top:3%;
   height: 50%;
   margin-right: 2vw;
+  margin-left: 3vw;
   border-radius: 0.5vw;
   border: solid;
   border-color: #888;
@@ -210,4 +211,10 @@ a:hover {
   margin-top:5%;
   height: 50%;
   margin-right: 2vw;
+}
+
+.selVeh {
+    height: 70%;
+    margin-top: 2%;
+    width: 15vw;
 }
