@@ -1,9 +1,10 @@
 
-<h1 style="margin: 20%;">W.I.P. Dashboard - Home</h1>
+<div>
 
 
 <?php 
-
-
+	require File::build_path(array('view','dashboard','graphs', 'Temperature.php'));
 
 ?>
+
+</div>

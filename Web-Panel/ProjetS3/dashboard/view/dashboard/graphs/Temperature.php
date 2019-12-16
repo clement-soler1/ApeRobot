@@ -15,14 +15,14 @@
  function drawChart() {
  var data = google.visualization.arrayToDataTable([
 
-       ['date', 'temperature'],
+       ['time', 'temperature', 'loudness'],
        <?php 
-      			$query = "SELECT * FROM Ap_Temperature ORDER BY time ASC";
+      			$query = "SELECT tmp.time, temperature, loudness FROM Ap_Temperature tmp JOIN Ap_LoudnessSensor ls ON tmp.time = ls.time  ORDER BY time ASC LIMIT 25";
 
-      			 $exec = mysqli_query($con,$query);
+      			 $exec = mysqli_query($con, $query);
              while($row = mysqli_fetch_array($exec)){
            
-             echo "['". $row['time'] ."',".$row['temperature']."],";
+             echo "['". $row['time'] .", ', ".$row['temperature'].", " . $row['loudness'] . "],";
 
              }
        ?> 
@@ -34,10 +34,21 @@
           title: 'Evolution de la température',
           curveType: 'none',
           legend: { position: 'bottom' },
-          backgroundColor: { fill:'transparent' }
+          backgroundColor: { fill:'transparent' },
+          series: {
+          0: {targetAxisIndex: 0},
+          1: {targetAxisIndex: 1}
+          },
+          vAxes: {
+          0: {title: 'temperature'},
+          1: {title: 'loudness'}
+
+        },
+
+          
 
  };
- var chart = new google.visualization.LineChart(document.getElementById("linechartTemp"));
+ var chart = new google.visualization.ComboChart(document.getElementById("linechartTemp"));
  chart.draw(data,options);
  }
 	
