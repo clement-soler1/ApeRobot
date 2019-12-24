@@ -3,7 +3,7 @@
 
 
 <?php 
-	require File::build_path(array('view','dashboard','graphs', 'Temperature.php'));
+	require File::build_path(array('view','dashboard','graphs', 'Accueil.php'));
 
 ?>
 

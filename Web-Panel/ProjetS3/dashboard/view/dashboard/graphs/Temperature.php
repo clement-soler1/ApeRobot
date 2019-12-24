@@ -22,7 +22,7 @@
       			 $exec = mysqli_query($con, $query);
              while($row = mysqli_fetch_array($exec)){
            
-             echo "['". $row['time'] .", ', ".$row['temperature'].", " . $row['loudness'] . "],";
+             echo "['". $row['time'] ."', ".$row['temperature'].", " . $row['loudness'] . "],";
 
              }
        ?> 

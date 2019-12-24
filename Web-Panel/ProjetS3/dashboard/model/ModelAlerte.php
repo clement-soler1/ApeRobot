@@ -42,6 +42,23 @@ class ModelAlerte {
         return $tab;
     }
 
+    public static function selectAlertAccueil($idv, $time) {
+        $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv AND date BETWEEN date_sub(now(),INTERVAL ". $time .") AND now()";
+        
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "tag_idv" => $idv,
+        );
+        
+        $req_prep->execute($values);
+        
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelAlerte');
+        $tab = $req_prep->fetchAll();
+        
+        return $tab;
+    }
+
     public function rankToColor() {
         switch ($this->rank) {
             case 1:

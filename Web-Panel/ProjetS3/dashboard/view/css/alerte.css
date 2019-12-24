@@ -4,6 +4,10 @@
     height: calc(100vh - 60px);
 }
 
+.container-fluid > .alertContainerMain{
+	overflow: inherit;
+}
+
 .alerte {
         margin-left: 7vw;
         margin-top: 3vw;

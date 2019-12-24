@@ -18,7 +18,7 @@
     <nav>
       <ul>
         <li>
-          <a href="index.php?controller=dashboard&action=home" data-title="Projects">Acceuil</a>
+          <a href="index.php?controller=dashboard&action=home" data-title="Projects">Accueil</a>
         </li>
         <li>
           <a href="index.php?controller=dashboard&action=alert" class="entypo-home">Alertes</a>
