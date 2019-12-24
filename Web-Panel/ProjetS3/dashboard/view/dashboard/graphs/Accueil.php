@@ -20,7 +20,7 @@
        				$change = $_REQUEST['time'];
        			}
        			else{
-       				$change = '2 MONTH';
+       				$change = '2 DAY';
        			}
       			$query = "SELECT COUNT(`idAlert`) AS nombredereleve, titre, idAlert FROM Ap_Alert alr WHERE titre <> CONVERT(titre USING ASCII) AND `idVehicule` = 1 AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
 
