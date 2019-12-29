@@ -2,6 +2,14 @@
 
 import datetime as date
 import copy
+from di_sensors.inertial_measurement_unit import InertialMeasurementUnit
+from di_sensors.easy_light_color_sensor import EasyLightColorSensor
+import easygopigo3 as easy
+gpg3_obj = easy.EasyGoPiGo3()
+distance_sensor = gpg3_obj.init_distance_sensor()
+loudness_sensor = gpg3_obj.init_loudness_sensor()
+imu = InertialMeasurementUnit(bus = "GPG3_AD1")
+my_lcs = EasyLightColorSensor(port='I2C', use_mutex=True, led_state=True)
 
 class Sensor:
 
@@ -60,7 +68,7 @@ class Sensor:
 class Accelerometre(Sensor):
 
     def __init__(self):
-        super().__init__("Ap_Accelerometer", "test")
+        super().__init__("Ap_Accelerometer", imu.read_linear_acceleration)
 
     def getListDataInFormatSQL(self):
         result = ""
@@ -75,7 +83,7 @@ class Accelerometre(Sensor):
 class AngleEuler(Sensor):
 
     def __init__(self):
-        super().__init__( "Ap_IMU", "test")
+        super().__init__( "Ap_IMU", imu.read_euler)
 
     def getListDataInFormatSQL(self):
         result = ""
@@ -91,7 +99,7 @@ class AngleEuler(Sensor):
 class Gyroscope(Sensor):
 
     def __init__(self):
-        super().__init__( "Ap_Gyroscope", "test")
+        super().__init__( "Ap_Gyroscope", imu.read_gyroscope)
 
     def getListDataInFormatSQL(self):
         result = ""
@@ -107,7 +115,7 @@ class Gyroscope(Sensor):
 class Magnetometre(Sensor):
 
     def __init__(self):
-        super().__init__( "Ap_Magnetometer", "test")
+        super().__init__( "Ap_Magnetometer", imu.read_magnetometer)
 
     def getListDataInFormatSQL(self):
         result = ""
@@ -123,7 +131,7 @@ class Magnetometre(Sensor):
 class Distance(Sensor):
 
     def __init__(self):
-        super().__init__( "Ap_DistanceSensor", "test")
+        super().__init__( "Ap_DistanceSensor", distance_sensor.read)
 
     def getListDataInFormatSQL(self):
         result = ""
@@ -138,7 +146,7 @@ class Distance(Sensor):
 class Temperature(Sensor):
 
     def __init__(self):
-        super().__init__( "Ap_Temperature", "test")
+        super().__init__( "Ap_Temperature", imu.read_temperature)
 
     def getListDataInFormatSQL(self):
         result = ""
@@ -153,7 +161,7 @@ class Temperature(Sensor):
 class Bruit(Sensor):
 
     def __init__(self):
-        super().__init__( "Ap_LoudnessSensor", "test")
+        super().__init__( "Ap_LoudnessSensor", loudness_sensor.read)
 
     def getListDataInFormatSQL(self):
         result = ""
@@ -168,7 +176,7 @@ class Bruit(Sensor):
 class CouleurEtLuminosite(Sensor):
 
     def __init__(self):
-        super().__init__( "Ap_LightAndColorSensor", "test")
+        super().__init__( "Ap_LightAndColorSensor", my_lcs.safe_raw_colors)
 
     def getListDataInFormatSQL(self):
         result = ""

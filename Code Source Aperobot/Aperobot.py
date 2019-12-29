@@ -5,7 +5,8 @@
 import GestionFichier
 import Sensors
 import time
-import traitementAlerte as processings
+import TraitementAlerte as processings
+
 
 # |0| Initialisation des variables
 listOfSensor = []
@@ -40,11 +41,14 @@ while True:
         i += 1
 
     # |3| Traitement urgent pour alerte
-#    startProcess = time.time()
-#    listT = processings.calculAlerteAccel(listOfSensor[0])
-#    print(str(listT) + "\n")
-#    print("TIME : " + str(time.time() - startProcess))
+    startProcess = time.time()
+    listAl = processings.alerteProcess(listOfSensor)
+    for alerte in listAl:
+        print(str(alerte.getInFormatTXT()))
+    print("TIME : " + str(time.time() - startProcess))
 
 
     # |4| Enregistrer DATA
+    startProcess = time.time()
     GestionFichier.saveData(listOfSensor)
+    print("TIME : " + str(time.time() - startProcess))

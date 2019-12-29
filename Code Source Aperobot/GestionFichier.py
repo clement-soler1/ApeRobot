@@ -42,7 +42,7 @@ def __saveDataInBDD(listOfSensor):
     for sensor in listOfSensor:
         listOfQuery += sensor.getListDataInFormatSQL()
 #    print(listOfQuery)
-#    BDD.sendQuery(listOfQuery)
+    BDD.sendQuery(str(listOfQuery))
 
 
 def __saveDataLocal(listOfSensor):
