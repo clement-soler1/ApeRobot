@@ -25,16 +25,31 @@ class ModelAlerte {
         }
     }
     
-    public static function selectAlertByVehicle($idv) {
-        $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv;";
-        
+    public static function selectAlertByVehicle($idv, $offset, $limit, $order) {
+        //Impossible de faire un PDOStatement avec un order by
+        switch ($order) {
+            case "1":
+                $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv ORDER BY date DESC, time DESC LIMIT :tag_off, :tag_lim;";
+                break;
+            case "2":
+                $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv ORDER BY rank DESC LIMIT :tag_off, :tag_lim;";
+                break;
+            case "3":
+                $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv ORDER BY titre LIMIT :tag_off, :tag_lim;";
+                break;
+            default:
+                $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv ORDER BY date DESC, time DESC LIMIT :tag_off, :tag_lim;";
+                break;
+        }
+
         $req_prep = Model::$pdo->prepare($sql);
 
-        $values = array(
-            "tag_idv" => $idv,
-        );
-        
-        $req_prep->execute($values);
+        $req_prep->bindValue(':tag_idv', $idv, PDO::PARAM_INT);
+        $req_prep->bindValue(':tag_off', $offset, PDO::PARAM_INT);
+        $req_prep->bindValue(':tag_lim', $limit, PDO::PARAM_INT);
+
+
+        $req_prep->execute();
         
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelAlerte');
         $tab = $req_prep->fetchAll();
@@ -43,7 +58,7 @@ class ModelAlerte {
     }
 
     public static function selectAlertAccueil($idv, $time) {
-        $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv AND date BETWEEN date_sub(now(),INTERVAL ". $time .") AND now()";
+        $sql = "SELECT * FROM Ap_Alert WHERE idVehicule=:tag_idv AND date BETWEEN date_sub(now(),INTERVAL ". $time .") AND now() ORDER BY date DESC LIMIT 5";
         
         $req_prep = Model::$pdo->prepare($sql);
 
@@ -121,6 +136,18 @@ class ModelAlerte {
 	echo '</div>';
         
         
+    }
+
+    public static function white_list(&$value, $allowed, $message) {
+        if ($value === null) {
+            return $allowed[0];
+        }
+        $key = array_search($value, $allowed, true);
+        if ($key === false) { 
+            throw new InvalidArgumentException($message); 
+        } else {
+            return $value;
+        }
     }
     
 }

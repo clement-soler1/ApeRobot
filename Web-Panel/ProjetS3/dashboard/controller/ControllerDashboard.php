@@ -4,7 +4,7 @@
 class ControllerDashboard {
     
     public static function home() {
-        $section_title = 'Acceuil';
+        $section_title = 'Accueil';
         $view = 'home.php';
         $SESSION['curAct'] = "home";
         require File::build_path(array('view','mainView.php'));
@@ -14,9 +14,10 @@ class ControllerDashboard {
         $section_title = 'Alertes';
         $view = 'alerts.php';
         $SESSION['curAct'] = "alert";
-        
-        $idv = $_SESSION['idv'];
-        $tabAlerts = ModelAlerte::selectAlertByVehicle($idv);
+        $sql = "SELECT COUNT(*) FROM `Ap_Alert` WHERE idVehicule=".$_SESSION['idv']; 
+        $result = Model::$pdo->prepare($sql); 
+        $result->execute(); 
+        $total_rows = $result->fetchColumn(); 
         require File::build_path(array('view','mainView.php'));
     }
     
@@ -30,9 +31,17 @@ class ControllerDashboard {
     }
 
     public static function vehicule() {
-        $section_title = 'Acceuil';
+        $section_title = 'Accueil';
         $view = 'vehicule.php';
         $SESSION['curAct'] = "vehicule";
+        require File::build_path(array('view','mainView.php'));
+    }
+
+    public static function data() {
+        $section_title = 'Données';
+        $view = 'data.php';
+        $SESSION['curAct'] = "data";
+        
         require File::build_path(array('view','mainView.php'));
     }
 }

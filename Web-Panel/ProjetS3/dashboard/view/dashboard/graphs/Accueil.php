@@ -1,11 +1,10 @@
 <?php
- $con = mysqli_connect('webinfo.iutmontp.univ-montp2.fr','sornayj','<wxcvbn,;:!123','sornayj');
+ $con = mysqli_connect(Conf::getHostname(), Conf::getLogin(), Conf::getPassword(), Conf::getDatabase());
  $con->set_charset("utf8");
 ?>
+ <link rel="stylesheet" type="text/css" href="./view/css/alerte.css">
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
      <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -17,12 +16,13 @@
        		<?php 
        			$data = 0;
        			if(isset($_REQUEST['time'])){
-       				$change = $_REQUEST['time'];
+              //Whitelisting de change pour éviter les injections. Impossible d'effectuer une req prep avec INTERVAL.
+              $change = ModelAlerte::white_list($_REQUEST['time'], ["2 DAY","1 DAY","1 WEEK","1 MONTH","1 YEAR"], "Unité invalide");
        			}
        			else{
        				$change = '2 DAY';
        			}
-      			$query = "SELECT COUNT(`idAlert`) AS nombredereleve, titre, idAlert FROM Ap_Alert alr WHERE titre <> CONVERT(titre USING ASCII) AND `idVehicule` = 1 AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
+      			$query = "SELECT COUNT(`idAlert`) AS nombredereleve, titre, idAlert FROM Ap_Alert alr WHERE `idVehicule` = ".$_SESSION['idv']." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
 
       			$exec = mysqli_query($con, $query);
 
@@ -81,9 +81,12 @@
   }
   else{
 
- 	echo '<div class="container-fluid">';
+ 	  echo '<div class="container-fluid">';
     echo '<div id="piechart" style="margin: auto;width: 80%; height: 500px;"></div>';
-    require_once File::build_path(array("view","dashboard","alerts.php"));
+    foreach ($tabAlerts as $alert) {
+        $alert->afficher();
+    }
   }
 ?>
 </div>
+<br>

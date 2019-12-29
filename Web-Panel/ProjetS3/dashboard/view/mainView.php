@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./view/css/entypo.css">
   <link rel="stylesheet" type="text/css" href="./view/css/mainView.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="./view/js/mainView.js"></script>
   <script type="text/javascript" src="./view/js/action.js"></script>
 </head>
@@ -24,7 +26,7 @@
           <a href="index.php?controller=dashboard&action=alert" class="entypo-home">Alertes</a>
         </li>
         <li>
-          <a href="#" data-title="Diary">Données</a>
+          <a href="index.php?controller=dashboard&action=data" data-title="Diary">Données</a>
         </li>
         <li>
           <a href="index.php?controller=dashboard&action=vehicule" data-title="Timeline">Véhicule</a>

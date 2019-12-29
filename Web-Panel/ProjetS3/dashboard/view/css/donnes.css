@@ -1,0 +1,155 @@
+.box {
+  position: relative;
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.box .tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 135%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.box .tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #555 transparent;
+}
+
+.box:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+
+.field + .field { 
+  margin-top: 0.75em;
+}
+
+.field {
+  position: relative;
+  border: none;
+}
+
+label {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  color: #919FAF;
+}
+
+.field.selecteur ~ label, input ~ label {
+  position: absolute;
+  top: -3em;
+  display: block;
+  border-radius: 3px;
+  padding: 0.5em;
+  font-size: 0.625em;
+  color: #F3F3F3;
+  background-color: #27313C;
+  pointer-events: none;
+  text-transform: initial;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.25s ease 0;
+}
+.field.selecteur ~ label::before, input ~ label::before {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #27313C;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  z-index: 1;
+  bottom: -5px;
+  left: 10px;
+}
+
+.field.selecteur:focus ~ label, input:focus ~ label {
+  opacity: 0.8;
+  transition: opacity 0.5s ease 1s;
+}
+
+.field.selecteur, input, button {
+  transition: all 0.5s ease;
+  padding: 0.75em;
+  font-size: inherit;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: #E2E5E5;
+  border: 2px solid #E2E5E5;
+}
+
+::-webkit-input-placeholder {
+  font-size: 0.75em;
+  color: #919FAF;
+}
+
+input[type="submit"], button {
+  display: inline-block;
+  width: auto;
+  font-size: 0.875em;
+  padding: 0.7142857143em 2.2857142857em;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  background-color: #383b42;
+  border: 2px solid #383b42;
+  text-transform: uppercase;
+  margin-left: 20px;
+}
+input[type="submit"]::before, input[type="submit"]::after, button::before, button::after {
+  
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+input[type="submit"]:focus, button:focus, input[type="submit"]:hover, button:hover {
+  border-color: #515661;
+  background-color: #515661;
+}
+input[type="submit"]:focus::after, input[type="submit"]:focus::before, button:focus::after, button:focus::before {
+  opacity: 1;
+}
+
+#dl{
+	margin-left: 5%;
+}
+
+#labelForm{
+	margin-top: 20px;
+}
+
+div > input[type="submit"]{
+	margin-left: 200px;
+}
+
+.graphSelect{
+	text-align: center;
+}
+
+.graphSelect * {
+	margin-top: 10px;
+}
+
+.graphSelect {
+	display: none;
+}

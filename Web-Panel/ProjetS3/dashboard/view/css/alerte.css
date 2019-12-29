@@ -2,6 +2,7 @@
     width: 100%;
     overflow: scroll;
     height: calc(100vh - 60px);
+    color: #f0f0f0;
 }
 
 .container-fluid > .alertContainerMain{
@@ -75,4 +76,47 @@
 	text-align: center;
 	font-style: oblique;
 
+}
+
+#pagination {
+  text-align:center;
+  list-style-type: none;
+  margin-top: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+#menu-pagination {
+  border-radius: 50px;
+  color: #383b42;
+  display:inline-block
+
+}
+
+#menu-pagination a {
+  border-radius: 10px;
+  color: #383b42;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  margin: auto;
+}
+
+.material-icons{
+	color: #383b42;
+}
+
+.material-icons:hover{
+	color: #717680;
+}
+
+.disabled {
+    pointer-events:none;
+    opacity:0.6;
+}
+
+#form{
+	margin: 20px;
 }
