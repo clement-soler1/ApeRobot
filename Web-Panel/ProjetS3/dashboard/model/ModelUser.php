@@ -156,7 +156,63 @@ class ModelUser {
         return (substr($return, 0, -1));
     }
 
-    
+    public function printCreatedVehicle() {
+        $idu = $this->getUserID();
+
+        $sql = "SELECT surnom FROM Ap_Vehicule WHERE idCreateur=:tag_idu;";
+
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "tag_idu" => $idu,
+        );
+
+        $req_prep->execute($values);
+        $tab = $req_prep->fetchAll();
+
+        if (count($tab) > 0) {
+
+            $strReturn = " ";
+
+            foreach ($tab as $val) {
+                $strReturn = $strReturn . $val["surnom"] . ', ';
+            }
+
+            return (substr($strReturn, 0, -2));
+        } else {
+            return 'Vous n\'avez créé aucuns véhicules !';
+        }
+    }
+
+    public function printAuthorizedVehicle() {
+        $idu = $this->getUserID();
+
+        $sql = "SELECT APV.surnom FROM Ap_Vehicule APV JOIN"
+            . " Ap_PossesVehicule APPV ON APPV.idVehicule=APV.idVehicule WHERE APPV.idUser=:tag_idu;";
+
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "tag_idu" => $idu,
+        );
+
+        $req_prep->execute($values);
+        $tab = $req_prep->fetchAll();
+
+
+        if (count($tab) > 0) {
+
+            $strReturn = " ";
+
+            foreach ($tab as $val) {
+                $strReturn = $strReturn . $val["surnom"] . ', ';
+            }
+
+            return (substr($strReturn, 0, -2));
+        } else {
+            return 'Vous n\'avez accés à aucuns véhicules !';
+        }
+    }
     
     
 }

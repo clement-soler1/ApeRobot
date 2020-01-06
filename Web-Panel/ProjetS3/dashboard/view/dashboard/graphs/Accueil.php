@@ -13,31 +13,35 @@
       	var data = google.visualization.arrayToDataTable([
 
        		['Type d\'alerte', 'Nombre d\'alertes'],
-       		<?php 
-       			$data = 0;
-       			if(isset($_REQUEST['time'])){
-              //Whitelisting de change pour éviter les injections. Impossible d'effectuer une req prep avec INTERVAL.
-              $change = ModelAlerte::white_list($_REQUEST['time'], ["2 DAY","1 DAY","1 WEEK","1 MONTH","1 YEAR"], "Unité invalide");
-       			}
-       			else{
-       				$change = '2 DAY';
-       			}
-            $req_base = "SELECT COUNT(ra.`idReleveAlerte`) AS nombredereleve, alr.nomAlerte AS titre
-                        FROM Ap_ReleveAlerte ra
-                        JOIN Ap_Alerte alr ON ra.typeAlerte = alr.typeAlerte
-                        JOIN Ap_AssociationCapteur ac ON alr.typeAlerte = ac.typeAlerte
-                        JOIN Ap_Capteur cpt ON ac.typeCapteur = cpt.typeCapteur ";
-      			$query = $req_base . " WHERE ra.`idVehicule` = ". $_SESSION['idv'] ." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
+            <?php
+            $data = 0;
+            if(isset($_REQUEST['time'])){
+                //Whitelisting de change pour éviter les injections. Impossible d'effectuer une req prep avec INTERVAL.
+                $change = ModelAlerte::white_list($_REQUEST['time'], ["2 DAY","1 DAY","1 WEEK","1 MONTH","1 YEAR"], "Unité invalide");
+            }
+            else{
+                $change = '2 DAY';
+            }
 
-      			$exec = mysqli_query($con, $query);
+            $query = "SELECT COUNT(nombredereleve) as nombredereleve, titre
+                         FROM  (SELECT COUNT(*) AS nombredereleve, alr.nomAlerte AS titre
+                                FROM Ap_ReleveAlerte ra
+                                LEFT JOIN Ap_Alerte alr ON ra.typeAlerte = alr.typeAlerte
+                                JOIN Ap_AssociationCapteur ac ON alr.typeAlerte = ac.typeAlerte
+                                JOIN Ap_Capteur cpt ON ac.typeCapteur = cpt.typeCapteur 
+                                WHERE ra.`idVehicule` = ". $_SESSION['idv'] ." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now()
+                                GROUP BY titre, date, time) tab
+                        GROUP BY titre";
 
-      			if(mysqli_num_rows($exec)){
-	             	while($row = mysqli_fetch_array($exec)){
-	           			echo "['". $row['titre'] ."', ".$row['nombredereleve']."],";
-	             	}
-	           			$data = 1;
-	            }
-       		?> 
+            $exec = mysqli_query($con, $query);
+
+            if(mysqli_num_rows($exec)){
+                while($row = mysqli_fetch_array($exec)){
+                    echo "['". $row['titre'] ."', ".$row['nombredereleve']."],";
+                }
+                $data = 1;
+            }
+            ?>
 	 	]);
 
       	var options = {
@@ -57,10 +61,6 @@
     </script>
 
 
-<?php
-$tabAlerts = ModelAlerte::selectAlertAccueil($_SESSION['idv'], $change);
-
-?>
 <div style="margin: 20px">
     <form action="index.php?controller=dashboard&action=home" method="post" name="form">
         <label for="time">Voir les alertes</label>
@@ -84,7 +84,7 @@ $tabAlerts = ModelAlerte::selectAlertAccueil($_SESSION['idv'], $change);
     require_once File::build_path(array("view","dashboard","graphs", "ras.php"));
   }
   else{
-
+      $tabAlerts = ModelAlerte::selectAlertAccueil($_SESSION['idv'], $change);
  	  echo '<div class="container-fluid">';
     echo '<div id="piechart" style="margin: auto;width: 80%; height: 500px;"></div>';
     foreach ($tabAlerts as $alert) {

@@ -10,11 +10,11 @@ echo '<div class="account-card">';
     echo '<p class="txtCentered"><b>Date de Naissance :</b> '. $usr->getDateNaissance() .'</p>';
     echo '<p class="txtCentered"><b>Téléphone :</b> '. $usr->printTel() .'</p>';
     echo '<br>';
-    echo '<p class="txtCentered"><b>Véhicules créés</b></p>';
-    echo '<p class="txtCentered">AlfaRoméo Mito</p>';
+    echo '<p class="txtCentered"><b>Véhicules créés :</b></p>';
+    echo '<p class="txtCentered">'. $usr->printCreatedVehicle() .'</p>';
     echo '<br>';
-    echo '<p class="txtCentered"><b>Véhicules Accesibles</b></p>';
-    echo '<p class="txtCentered">AlfaRoméo Mito</p>';
+    echo '<p class="txtCentered"><b>Véhicules Accesibles :</b></p>';
+    echo '<p class="txtCentered">'. $usr->printAuthorizedVehicle() .'</p>';
     echo '<br>';
 echo '</div>';
 ?>
