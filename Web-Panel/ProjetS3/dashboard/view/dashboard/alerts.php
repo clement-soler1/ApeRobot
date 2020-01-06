@@ -30,7 +30,7 @@
 
         if (isset($_SESSION['idv'])) {
 
-            $sql = "SELECT COUNT(*) FROM `Ap_Alert` WHERE idVehicule=" . $_SESSION['idv'];
+            $sql = "SELECT COUNT(*) FROM `Ap_Alerte` alr JOIN `Ap_ReleveAlerte` ra ON alr.`typeAlerte` = ra.`typeAlerte` WHERE ra.idVehicule=" . $_SESSION['idv'];
             $result = Model::$pdo->prepare($sql);
             $result->execute();
             $total_rows = $result->fetchColumn();
