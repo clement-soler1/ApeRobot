@@ -22,12 +22,12 @@
        			else{
        				$change = '2 DAY';
        			}
-            $req_base = "SELECT COUNT(`ra.idReleveAlerte`) AS nombredereleve, alr.nomAlerte AS titre, idReleveAlerte AS idAlert
+            $req_base = "SELECT COUNT(ra.`idReleveAlerte`) AS nombredereleve, alr.nomAlerte AS titre
                         FROM Ap_ReleveAlerte ra
                         JOIN Ap_Alerte alr ON ra.typeAlerte = alr.typeAlerte
                         JOIN Ap_AssociationCapteur ac ON alr.typeAlerte = ac.typeAlerte
-                        JOIN Ap_Capteur cpt ON ac.typeCapteur = cpt.typeCapteur";
-      			$query = $req_base . " WHERE `idVehicule` = ". $_SESSION['idv'] ." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
+                        JOIN Ap_Capteur cpt ON ac.typeCapteur = cpt.typeCapteur ";
+      			$query = $req_base . " WHERE ra.`idVehicule` = ". $_SESSION['idv'] ." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
 
       			$exec = mysqli_query($con, $query);
 

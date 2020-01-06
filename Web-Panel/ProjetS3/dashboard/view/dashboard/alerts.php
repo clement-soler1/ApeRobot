@@ -27,20 +27,24 @@
 
         $no_of_records_per_page = 5;
         $offset = ($page - 1) * $no_of_records_per_page;
-
+        $v = 0;
         $tabAlerts = ModelAlerte::selectAlertByVehicle($_SESSION['idv'], $offset, $no_of_records_per_page, $_SESSION['order']);
         $total_pages = ceil($total_rows / $no_of_records_per_page);
-        if(empty($tabAlerts))
+        if(empty($tabAlerts)){
+            $v = 1;
             require_once File::build_path(array("view","dashboard","graphs", "ras.php"));
-        else {
+        } else {
             foreach ($tabAlerts as $alert) {
     		    $alert->afficher();
     		}
-            echo <<< 'TEXT'
+        }
+?>
     <script type="text/javascript">
-    document.getElementById('ordre').value = '<?= $_SESSION['order'] ?>';
+    document.getElementById('ordre').value = <?= $_SESSION['order'] ?>;
     </script>
 
+
+        
     <ul id="pagination">
         <li id="menu-pagination" class="<?php if($page == 1){ echo 'disabled'; } ?>"><a href="?controller=dashboard&action=alert"><i class="material-icons">first_page</i></a></li>
         <li id="menu-pagination" class="<?php if($page <= 1){ echo 'disabled'; } ?>">
@@ -51,7 +55,11 @@
         </li>
         <li id="menu-pagination" class="<?php if($page == $total_pages){ echo 'disabled'; } ?>"><a href="?controller=dashboard&action=alert&page=<?= $total_pages ?>"><i class="material-icons">last_page</i></a></li>
     </ul>
-</div>
-TEXT;
-}
+
+<?php 
+    if ($v == 1){
+        echo '<script type="text/javascript">';
+        echo 'document.getElementById(\'pagination\').style.display = "none";';
+        echo '</script>';
+    }
 ?>

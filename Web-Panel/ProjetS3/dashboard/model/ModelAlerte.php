@@ -122,7 +122,7 @@ class ModelAlerte {
     public function findTypeIcon() {
         $path = './view/icons/';
         $ext = '.png';
-        if ($this->$niveauAlerte <= 2) {
+        if ($this->niveauAlerte <= 2) {
             $ext = '_bk.png';
         }
         switch ($this->typeAlerte) {
