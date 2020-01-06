@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 #Main du projet
 
 # |.| Déclaration des import nécessaires
@@ -26,29 +27,18 @@ while True:
 
     # |2| Récupération des data sur ~10 secondes
     while i < 10:
-        startRetrieveData = time.time()                 #Pour balayer tout les capteurs dans un intervalle à peu prés régulier (1s)
+        startRetrieveData = time.time() #Pour balayer tout les capteurs dans un intervalle à peu prés régulier (1s)
         for sensor in listOfSensor:
             sensor.retrieveData()
-#        if(i == 9):
-#            listOfSensor[0].listData[9] = [1111,2222,3333]
-#        print(listOfSensor[0].getListDataInFormatTXT())
-#        print("                ")
 
         end = time.time() - startRetrieveData
         if (end < 1):
-            print(end)
             time.sleep(1 - end)
         i += 1
 
-    # |3| Traitement urgent pour alerte
-    startProcess = time.time()
+    # |3| Traitement et récupération liste d'alerte
     listAl = processings.alerteProcess(listOfSensor)
-    for alerte in listAl:
-        print(str(alerte.getInFormatTXT()))
-    print("TIME : " + str(time.time() - startProcess))
 
 
     # |4| Enregistrer DATA
-    startProcess = time.time()
     GestionFichier.saveData(listOfSensor)
-    print("TIME : " + str(time.time() - startProcess))
