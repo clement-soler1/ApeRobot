@@ -32,6 +32,7 @@ while True:
             sensor.retrieveData()
 
         end = time.time() - startRetrieveData
+        #print("TIME :" + str(end) + "\n")
         if (end < 1):
             time.sleep(1 - end)
         i += 1
@@ -41,4 +42,4 @@ while True:
 
 
     # |4| Enregistrer DATA
-    GestionFichier.saveData(listOfSensor)
+    GestionFichier.saveData(listOfSensor, listAl)

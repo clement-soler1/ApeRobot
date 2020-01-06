@@ -33,8 +33,8 @@ class GestionMySQL(GestionBDD):
                     record = result.fetchall()
                     #print("record :", record)
                 #else:
-                #    print("Number of rows affected by statement '{}': {}".format( \
-                #            result.statement, result.rowcount))
+                 #   print("Number of rows affected by statement '{}': {}".format( \
+                  #          result.statement, result.rowcount))
         if (connection.is_connected()):
             cursor.close()
             connection.commit()

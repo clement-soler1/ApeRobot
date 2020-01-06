@@ -14,7 +14,7 @@ my_lcs = EasyLightColorSensor(port='I2C', use_mutex=True, led_state=True)
 class Sensor:
 
     def __init__(self, nom, capteur):
-        self.idVehicule = 1
+        self.idVehicule = 3
         self.listData = []
         self.listDate = []
         self.listTime = []
@@ -82,9 +82,9 @@ class Accelerometre(Sensor):
     def getListDataInFormatSQL(self):
         result = ""
         for i in range(0, len(self.listData)):
-            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 5, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][0]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 5, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][1]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 5, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][2]) + ");"
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 5, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][0]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 5, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][1]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 5, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][2]) + ");"
 
         return result
 
@@ -99,9 +99,9 @@ class AngleEuler(Sensor):
     def getListDataInFormatSQL(self):
         result = ""
         for i in range(0, len(self.listData)):
-            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 7, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][0]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 7, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][1]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 7, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][2]) + ");"
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 7, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][0]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 7, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][1]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 7, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][2]) + ");"
 
         return result
 
@@ -116,9 +116,9 @@ class Gyroscope(Sensor):
     def getListDataInFormatSQL(self):
         result = ""
         for i in range(0, len(self.listData)):
-            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 6, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][0]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 6, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][1]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 6, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][2]) + ");"
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 6, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][0]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 6, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][1]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 6, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][2]) + ");"
 
         return result
 
@@ -133,9 +133,9 @@ class Magnetometre(Sensor):
     def getListDataInFormatSQL(self):
         result = ""
         for i in range(0, len(self.listData)):
-            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 8, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][0]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 8, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][1]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 8, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][2]) + ");"
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 8, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][0]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 8, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][1]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 8, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][2]) + ");"
 
         return result
 
@@ -148,7 +148,9 @@ class Distance(Sensor):
         super().__init__( "Ap_DistanceSensor", distance_sensor.read)
 
     def getListDataInFormatSQL(self):
-            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 3, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i]) + ");"
+        result = ""
+        for i in range(0, len(self.listData)):
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 3, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i]) + ");"
         return result
 
 
@@ -162,7 +164,7 @@ class Temperature(Sensor):
     def getListDataInFormatSQL(self):
         result = ""
         for i in range(0, len(self.listData)):
-            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 1, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i]) + ");"
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 1, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i]) + ");"
         return result
 
 
@@ -176,7 +178,7 @@ class Bruit(Sensor):
     def getListDataInFormatSQL(self):
         result = ""
         for i in range(0, len(self.listData)):
-            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 4, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i]) + ");"
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 4, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i]) + ");"
         return result
 
 
@@ -190,9 +192,9 @@ class CouleurEtLuminosite(Sensor):
     def getListDataInFormatSQL(self):
         result = ""
         for i in range(0, len(self.listData)):
-                        result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][0]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][1]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][2]) + ");" \
-                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, " + str(self.listDate[i]) + ", " + str(self.listTime[i]) + ", " + str(self.listData[i][3]) + ");"
+            result += "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][0]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][1]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][2]) + ");" \
+                       + "CALL `insert_releve_and_data`( " + str(self.idVehicule) + ", 2, '" + str(self.listDate[i]) + "', '" + str(self.listTime[i]) + "', " + str(self.listData[i][3]) + ");"
 
         return result
