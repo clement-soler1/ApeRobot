@@ -135,6 +135,16 @@ class ModelVehicule {
         return (substr($strReturn, 0, -2));
     }
 
+    /**
+     * @return null
+     */
+    public function getIdCreateur()
+    {
+        return $this->idCreateur;
+    }
+
+
+
 
 
 

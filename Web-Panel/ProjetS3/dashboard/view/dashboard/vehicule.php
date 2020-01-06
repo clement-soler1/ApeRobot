@@ -20,6 +20,19 @@
             echo '<p class="txtCentered"><b>Personnes autorisées :</b></p>';
             echo '<p class="txtCentered">'. $veh->printAuthorizedPerson() .'</p>';
         echo '</div>';
+
+        echo '<div class="divBtn">';
+        if ($veh->getIdCreateur() == $_SESSION['userID']) {
+            echo '<a class="btnPartager">Partager</a>';
+            echo '<a class="btnUpdate">Modifier</a>';
+            echo '<a class="btnDelete">Supprimer</a>';
+        };
+        echo '<a class="btnNew">Nouveau</a>';
+
+
+        echo '</div>';
     ?>
+
+
 
 </div>
