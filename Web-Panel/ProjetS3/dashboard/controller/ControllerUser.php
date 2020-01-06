@@ -59,6 +59,15 @@ class ControllerUser {
         $pagetitle='ApeRobot - Connexion';
         require File::build_path(array("view","login.php"));
     }
+
+    public static function disconnect() {
+
+        session_unset();
+        session_destroy();
+        setcookie(session_name(),'',time()-1);
+
+        ControllerDashboard::backToHome();
+    }
     
 }
 ?>

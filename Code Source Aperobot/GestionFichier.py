@@ -3,7 +3,9 @@ import socket
 import os
 import time
 import datetime as date
-import GestionBDD as BDD
+import GestionBDD
+
+BDD = GestionBDD.GestionMySQL()
 
 def __is_connected():
     try:

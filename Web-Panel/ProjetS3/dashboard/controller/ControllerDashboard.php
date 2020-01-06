@@ -30,7 +30,7 @@ class ControllerDashboard {
     }
 
     public static function vehicule() {
-        $section_title = 'Accueil';
+        $section_title = 'Véhicule';
         $view = 'vehicule.php';
         $SESSION['curAct'] = "vehicule";
         require File::build_path(array('view','mainView.php'));
@@ -42,6 +42,17 @@ class ControllerDashboard {
         $SESSION['curAct'] = "data";
         
         require File::build_path(array('view','mainView.php'));
+    }
+
+    public static function account() {
+        $section_title = 'Mon compte';
+        $view = "account.php";
+        $SESSION['curAct'] = "account";
+        require File::build_path(array('view','mainView.php'));
+    }
+
+    public static function backToHome() {
+        require File::build_path(array('view','dashboard','backHome.php'));
     }
 }
 ?>

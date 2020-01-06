@@ -56,7 +56,7 @@
       echo '</select>';
       
       $usr = ModelUser::getUserByEmail($_SESSION['userEmail']);
-      echo '<a href="" class="btnNav"><i class="material-icons">person</i>Hello '. $usr->getPrenom() .'</a>';
+      echo '<a href="index.php?controller=dashboard&action=account" class="btnNav"><i class="material-icons">person</i>Hello '. $usr->getPrenom() .'</a>';
     echo '</div>';
     echo '</div>';
     
