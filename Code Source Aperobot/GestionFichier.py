@@ -13,6 +13,7 @@ def __is_connected():
         pass
     return False
 
+
 def __delete_old_data():
     dir, age = './Data', 10
     age = int(age)*86400
@@ -26,47 +27,64 @@ def __delete_old_data():
                 print('Deleted: %s' % (file))
 
 
-def __saveDataLocalToTransferLater(listOfSensor):
+def __saveDataLocalToTransferLater(listOfSensor, listOfAlerte):
     if not os.path.isdir('./DataToTransfer'):
         os.makedirs('./DataToTransfer')
     file = open("./DataToTransfer/dataToTransfer.sql","a")
+    
     reslt = ""
+    
     for sensor in listOfSensor:
         reslt += sensor.getListDataInFormatSQL() + '\n'
+    
+    if listOfAlerte:
+        for alerte in listOfAlerte:
+            reslt += alerte.getAlerteInFormatSQL()
+    
     file.write(reslt)
     file.close()
 
 
-def __saveDataInBDD(listOfSensor):
+def __saveDataInBDD(listOfSensor, listOfAlerte):
     listOfQuery = ""
+
     for sensor in listOfSensor:
         listOfQuery += sensor.getListDataInFormatSQL()
-#    print(listOfQuery)
+
+    if listOfAlerte:
+        for alerte in listOfAlerte:
+            listOfQuery += alerte.getAlerteInFormatSQL()
+
     BDD.sendQuery(str(listOfQuery))
 
 
-def __saveDataLocal(listOfSensor):
+def __saveDataLocal(listOfSensor, listOfAlerte):
     if not os.path.isdir('./Data'):
         os.makedirs('./Data')
     __delete_old_data()
+
     date_of_today = date.datetime.now().strftime('%d-%m-%Y')
     file = open("./Data/data_" + date_of_today + ".txt","a")
     reslt = ""
+
     for sensor in listOfSensor:
         reslt += sensor.getListDataInFormatTXT()
+
+    if listOfAlerte:
+        for alerte in listOfAlerte:
+            reslt += alerte.getAlerteInFormatTXT()
+
     file.write(reslt)
     file.close()
-#    print("data : \n" + reslt)
 
 
-
-def saveData(listOfSensor):
+def saveData(listOfSensor, listOfAlerte):
     if __is_connected():
-        __saveDataInBDD(listOfSensor)
+        __saveDataInBDD(listOfSensor, listOfAlerte)
         __saveIfNeeded()
     else :
-        __saveDataLocalToTransferLater(listOfSensor)
-    __saveDataLocal(listOfSensor)
+        __saveDataLocalToTransferLater(listOfSensor, listOfAlerte)
+    __saveDataLocal(listOfSensor, listOfAlerte)
 
 
 def __saveIfNeeded():

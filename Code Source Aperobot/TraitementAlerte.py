@@ -28,25 +28,25 @@ def alerteProcess(listOfSensor):
     maxAlerteLight = max(listAlerteLight)
     indexAlerteLight = listAlerteLight.index(maxAlerteLight)
     
-    listAlerteObj.append(Alerte.Alerte(listOfSensor[0], indexAlerteAccel, maxAlerteAccel))
-    listAlerteObj.append(Alerte.Alerte(listOfSensor[2], indexAlerteGyro, maxAlerteGyro))
-    listAlerteObj.append(Alerte.Alerte(listOfSensor[4], indexAlerteDist, maxAlerteDist))
-    listAlerteObj.append(Alerte.Alerte(listOfSensor[5], indexAlerteTemp, maxAlerteTemp))
-    listAlerteObj.append(Alerte.Alerte(listOfSensor[6], indexAlerteBruit, maxAlerteBruit))
-    listAlerteObj.append(Alerte.Alerte(listOfSensor[7], indexAlerteLight, maxAlerteLight))
+    # À Finir !! Car certains capteurs sont regroupé, et on n'enregistre pas d'alerte si le niveu est 0 par exemple
+    listAlerteObj.append(Alerte.Alerte(1, maxAlerteAccel, listOfSensor[0].getList()[1][indexAlerteAccel], listOfSensor[0].getList()[2][indexAlerteAccel]))
+    listAlerteObj.append(Alerte.Alerte(1, maxAlerteGyro, listOfSensor[2].getList()[1][indexAlerteGyro], listOfSensor[2].getList()[2][indexAlerteGyro]))
+    listAlerteObj.append(Alerte.Alerte(1, maxAlerteDist, listOfSensor[4].getList()[1][indexAlerteDist], listOfSensor[4].getList()[2][indexAlerteDist]))
+    listAlerteObj.append(Alerte.Alerte(1, maxAlerteTemp, listOfSensor[5].getList()[1][indexAlerteTemp], listOfSensor[5].getList()[2][indexAlerteTemp]))
+    listAlerteObj.append(Alerte.Alerte(1, maxAlerteBruit, listOfSensor[6].getList()[1][indexAlerteBruit], listOfSensor[6].getList()[2][indexAlerteBruit]))
+    listAlerteObj.append(Alerte.Alerte(1, maxAlerteLight, listOfSensor[7].getList()[1][indexAlerteLight], listOfSensor[7].getList()[2][indexAlerteLight]))
     return listAlerteObj
     
-#Normalisation des axes à verifier et/ou à adapter :  X,Y,Z ; Heading,Roll,Pitch (comme dans les relevées)
 
-def calculDeltaAxis(tab_axis): #fonctionne aussi pour le gyro
+def calculDeltaAxis(tab_axis):
     alerteAxis = []
-    listAxis = tab_axis.getListData()
-    old_listAxis = tab_axis.getOldListData()
+    listAxis = tab_axis.getList()[0]
+    old_listAxis = tab_axis.getOldList()[0]
     
     if(old_listAxis):
         diff = []
         
-        for axis in range(0, len(listAxis[0])): #il faut vérifier que suivant les valeurs prisent par le gyro le calcul reste pertinent exemple : 360° en moins d'une seconde ?
+        for axis in range(0, len(listAxis[0])):
             if(listAxis[0][axis] < 0):
                 diff.append(listAxis[0][axis] - old_listAxis[len(old_listAxis)-1][axis])
             else:
@@ -66,6 +66,7 @@ def calculDeltaAxis(tab_axis): #fonctionne aussi pour le gyro
 
     return alerteAxis
 
+
 def calculAlerteAccel(accel):
     alerteAccel = []
     for seconde in range(0, len(accel)):
@@ -81,7 +82,8 @@ def calculAlerteAccel(accel):
 
     return alerteAccel
 
-def calculAlerteGyro(gyro): #il faut vérifier les valeurs que peut prendre le gyro, et lesquelles sont acceptable.
+
+def calculAlerteGyro(gyro):
     alerteGyro = []
     for seconde in range(0, len(gyro)):
         maximum = max(gyro[seconde])
@@ -96,7 +98,8 @@ def calculAlerteGyro(gyro): #il faut vérifier les valeurs que peut prendre le g
 
     return alerteGyro
     
-def calculAlerteMagnetometre(magneto): #il faut vérifier les valeurs que peut prendre le gyro, et lesquelles sont acceptable.
+
+def calculAlerteMagnetometre(magneto):
     alerteAccel = []
     for seconde in range(0, len(magneto)):
         maximum = max(magneto[seconde])
@@ -114,7 +117,7 @@ def calculAlerteMagnetometre(magneto): #il faut vérifier les valeurs que peut p
 
 def calculAlerteTemperature(temperature):
     alerteTemperature = []
-    listTemperature = temperature.getListData()
+    listTemperature = temperature.getList()[0]
     for temp in listTemperature:
         if(temp < -5):
             alerteTemperature.append(1)
@@ -129,9 +132,10 @@ def calculAlerteTemperature(temperature):
             
     return alerteTemperature
 
+
 def calculAlerteDistance(distance):
     alerteDistance = []
-    listDistance = distance.getListData()
+    listDistance = distance.getList()[0]
 
     for data in listDistance:
         if (data in range(0, 5)):
@@ -142,9 +146,10 @@ def calculAlerteDistance(distance):
             alerteDistance.append(0)
     return alerteDistance
 
+
 def calculAlerteBruit(bruit):
     alerteBruit = []
-    listBruit = bruit.getListData()
+    listBruit = bruit.getList()[0]
 
     for data in listBruit:
         if (data > 270):
@@ -154,9 +159,10 @@ def calculAlerteBruit(bruit):
 
     return alerteBruit
 
+
 def calculAlerteLightAndColor(lightAndColor):
     alerteLightAndColor = []
-    listLightAndColor = lightAndColor.getListData()
+    listLightAndColor = lightAndColor.getList()[0]
 
     for data in listLightAndColor:
         if (data[3] > 0.8):
