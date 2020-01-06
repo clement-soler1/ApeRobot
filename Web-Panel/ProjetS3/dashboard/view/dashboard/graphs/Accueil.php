@@ -57,17 +57,21 @@
     </script>
 
 
+<?php
+$tabAlerts = ModelAlerte::selectAlertAccueil($_SESSION['idv'], $change);
+
+?>
 <div style="margin: 20px">
-	<form action="index.php?controller=dashboard&action=home" method="post" name="form">
-	 <label for="time">Voir les alertes</label>
-	  <select name="time" onchange=document.form.submit(); id="change">
-	  		<option value="1 DAY">Du jour</option>
-	        <option value="2 DAY">Depuis hier</option>
-	        <option value="1 WEEK">De la semaine</option>
-	        <option value="1 MONTH">Du mois</option>
-	        <option value="1 YEAR">De l'année</option>
-	    </select>
-	</form>
+    <form action="index.php?controller=dashboard&action=home" method="post" name="form">
+        <label for="time">Voir les alertes</label>
+        <select name="time" onchange=document.form.submit(); id="change">
+            <option value="1 DAY">Du jour</option>
+            <option value="2 DAY">Depuis hier</option>
+            <option value="1 WEEK">De la semaine</option>
+            <option value="1 MONTH">Du mois</option>
+            <option value="1 YEAR">De l'année</option>
+        </select>
+    </form>
 </div>
 
 <script type="text/javascript">
