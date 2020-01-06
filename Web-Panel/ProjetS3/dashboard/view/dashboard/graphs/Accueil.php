@@ -22,7 +22,12 @@
        			else{
        				$change = '2 DAY';
        			}
-      			$query = "SELECT COUNT(`idAlert`) AS nombredereleve, titre, idAlert FROM Ap_Alert alr WHERE `idVehicule` = ".$_SESSION['idv']." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
+            $req_base = "SELECT COUNT(`ra.idReleveAlerte`) AS nombredereleve, alr.nomAlerte AS titre, idReleveAlerte AS idAlert
+                        FROM Ap_ReleveAlerte ra
+                        JOIN Ap_Alerte alr ON ra.typeAlerte = alr.typeAlerte
+                        JOIN Ap_AssociationCapteur ac ON alr.typeAlerte = ac.typeAlerte
+                        JOIN Ap_Capteur cpt ON ac.typeCapteur = cpt.typeCapteur";
+      			$query = $req_base . " WHERE `idVehicule` = ". $_SESSION['idv'] ." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now() GROUP BY titre";
 
       			$exec = mysqli_query($con, $query);
 
@@ -75,9 +80,7 @@
   
   <?php
   if ($data == 0){
-  	echo '<div style="margin: auto; text-align:center">';
-  	echo '<img style="height : 400px" src="./view/icons/checkmark.png" alt="Aucun incident">';
-  	echo '<p> Aucune alerte détectée. Restez prudent !</p></div>';
+    require_once File::build_path(array("view","dashboard","graphs", "ras.php"));
   }
   else{
 

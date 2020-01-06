@@ -29,20 +29,20 @@
 
 		$req_prep = Model::$pdo->prepare($sql);
 		$req_prep->execute($values);       
-        echo <<<TEXT
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-		google.charts.load('current', {'packages':['corechart']});
-		google.charts.setOnLoadCallback(drawChart);
+		$verif = $req_prep->rowCount();
+		if($verif > 0){
+			echo <<<TEXT
+			<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+			<script type="text/javascript">
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
 
-		function drawChart() {
-		var data = google.visualization.arrayToDataTable([
+			function drawChart() {
+			var data = google.visualization.arrayToDataTable([
 
-		['Date de l`alerte', 'Données relevées'],
+			['Date du relevé', 'Donnée'],
 TEXT;
-
-		if($verif = $req_prep->rowCount()){
 	    	while($row = $req_prep->fetch(PDO::FETCH_ASSOC)){
 	           	echo "['". $row['date'].' '. $row['time'] ."', ".$row['donnee']."],";
 	        }
@@ -60,11 +60,11 @@ TEXT;
 	        };
 	        </script>
 TEXT;
-		}
-		echo $verif;
-		if($verif > 0){
 			echo '<div class="container-fluid">';
 			echo '<div id="curve_chart" style="margin: auto;width: 80%; height: 500px;"></div>';
+		}
+		else {
+			require_once File::build_path(array("view","dashboard","graphs", "nodata.php"));
 		}
 	}
 ?>
