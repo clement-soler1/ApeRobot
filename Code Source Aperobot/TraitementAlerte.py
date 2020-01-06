@@ -29,12 +29,19 @@ def alerteProcess(listOfSensor):
     indexAlerteLight = listAlerteLight.index(maxAlerteLight)
     
     # À Finir !! Car certains capteurs sont regroupé, et on n'enregistre pas d'alerte si le niveu est 0 par exemple
-    listAlerteObj.append(Alerte.Alerte(1, maxAlerteAccel, listOfSensor[0].getList()[1][indexAlerteAccel], listOfSensor[0].getList()[2][indexAlerteAccel]))
-    listAlerteObj.append(Alerte.Alerte(1, maxAlerteGyro, listOfSensor[2].getList()[1][indexAlerteGyro], listOfSensor[2].getList()[2][indexAlerteGyro]))
-    listAlerteObj.append(Alerte.Alerte(1, maxAlerteDist, listOfSensor[4].getList()[1][indexAlerteDist], listOfSensor[4].getList()[2][indexAlerteDist]))
-    listAlerteObj.append(Alerte.Alerte(1, maxAlerteTemp, listOfSensor[5].getList()[1][indexAlerteTemp], listOfSensor[5].getList()[2][indexAlerteTemp]))
-    listAlerteObj.append(Alerte.Alerte(1, maxAlerteBruit, listOfSensor[6].getList()[1][indexAlerteBruit], listOfSensor[6].getList()[2][indexAlerteBruit]))
-    listAlerteObj.append(Alerte.Alerte(1, maxAlerteLight, listOfSensor[7].getList()[1][indexAlerteLight], listOfSensor[7].getList()[2][indexAlerteLight]))
+    if (maxAlerteAccel > 0):
+        listAlerteObj.append(Alerte.Alerte(1, maxAlerteAccel, listOfSensor[0].getList()[1][indexAlerteAccel], listOfSensor[0].getList()[2][indexAlerteAccel]))
+    if (maxAlerteGyro > 0):
+        listAlerteObj.append(Alerte.Alerte(1, maxAlerteGyro, listOfSensor[2].getList()[1][indexAlerteGyro], listOfSensor[2].getList()[2][indexAlerteGyro]))
+    if (maxAlerteDistance > 0):
+        listAlerteObj.append(Alerte.Alerte(1, maxAlerteDist, listOfSensor[4].getList()[1][indexAlerteDist], listOfSensor[4].getList()[2][indexAlerteDist]))
+    if (maxAlerteTemp > 0):
+        listAlerteObj.append(Alerte.Alerte(1, maxAlerteTemp, listOfSensor[5].getList()[1][indexAlerteTemp], listOfSensor[5].getList()[2][indexAlerteTemp]))
+    if (maxAlerteBruit > 0):
+        listAlerteObj.append(Alerte.Alerte(1, maxAlerteBruit, listOfSensor[6].getList()[1][indexAlerteBruit], listOfSensor[6].getList()[2][indexAlerteBruit]))
+    if (maxAlerteLight > 0):
+        listAlerteObj.append(Alerte.Alerte(1, maxAlerteLight, listOfSensor[7].getList()[1][indexAlerteLight], listOfSensor[7].getList()[2][indexAlerteLight]))
+    
     return listAlerteObj
     
 
