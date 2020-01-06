@@ -25,8 +25,7 @@ class ControllerDashboard {
         
         $_SESSION['idv'] = $_REQUEST['idv'];
         $newAction = $_REQUEST['red'];
-        
-        ControllerDashboard::alert();
+        ControllerDashboard::$newAction();
         
     }
 

@@ -42,7 +42,7 @@
     echo '<div class="title">';
       echo '<h2>'. $section_title .'</h2>';
       echo '<div class="flexRow">';
-      echo '<select onchange=\'setCurVeh(this.value,'. $SESSION['curAct'] .')\' class="selVeh">';
+      echo '<select onchange=\'setCurVeh(this.value,"'. $SESSION['curAct'] .'")\' class="selVeh">';
             $tav = ModelVehicule::getVehicleByPossesors($_SESSION["userID"]);
             foreach ($tav as $v) {
                 if ($v->getIdVehicule() == $_SESSION['idv']) {
