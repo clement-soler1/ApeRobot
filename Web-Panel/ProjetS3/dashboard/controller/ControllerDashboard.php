@@ -50,5 +50,9 @@ class ControllerDashboard {
         $SESSION['curAct'] = "account";
         require File::build_path(array('view','mainView.php'));
     }
+
+    public static function backToHome() {
+        require File::build_path(array('view','dashboard','backHome.php'));
+    }
 }
 ?>

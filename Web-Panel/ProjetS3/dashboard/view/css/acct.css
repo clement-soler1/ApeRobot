@@ -1,5 +1,10 @@
+.txtCentered {
+    width: 100%;
+    text-align: center;
+}
 
 .account-card {
+    margin-top: 2vw;
     width: 40%;
     margin-left: 30%;
     border: black 2px solid;/*a delete*/
@@ -10,4 +15,28 @@
 .acct-name {
     background-color: #FFF;
     color: #000;
+    border-top: 1px solid rgba(101, 116, 134, 0.57);
+}
+
+.acctI {
+    margin-left: 35%;
+    width: 30%;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.divDisc {
+    display: flex;
+    justify-content: center;
+}
+
+.btnDisconnect {
+    margin-top: 1vw;
+    background-color: red;
+    height: 2vw;
+    width: 10vw;
+    text-align: center;
+    padding-top: 0.5vw;
+    border: #2E3036 2px solid;
+    border-radius: 7px;
 }

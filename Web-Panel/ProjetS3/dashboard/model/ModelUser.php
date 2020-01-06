@@ -143,6 +143,19 @@ class ModelUser {
         
     }
 
+    public function printTel() {
+        $no = $this->telephone;
+        $str = str_split($no, 2);
+
+        $return = "";
+
+        foreach ($str as $s) {
+            $return = $return . $s . '.';
+        }
+
+        return (substr($return, 0, -1));
+    }
+
     
     
     
