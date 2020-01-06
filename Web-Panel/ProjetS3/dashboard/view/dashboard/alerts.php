@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <?php
+
+
+
     if (isset($_REQUEST['page'])) {
         $page = $_REQUEST['page'];
     } else {
@@ -25,18 +28,29 @@
 
 	<?php
 
-        $no_of_records_per_page = 5;
-        $offset = ($page - 1) * $no_of_records_per_page;
-        $v = 0;
-        $tabAlerts = ModelAlerte::selectAlertByVehicle($_SESSION['idv'], $offset, $no_of_records_per_page, $_SESSION['order']);
-        $total_pages = ceil($total_rows / $no_of_records_per_page);
-        if(empty($tabAlerts)){
-            $v = 1;
-            require_once File::build_path(array("view","dashboard","graphs", "ras.php"));
+        if (isset($_SESSION['idv'])) {
+
+            $sql = "SELECT COUNT(*) FROM `Ap_Alert` WHERE idVehicule=" . $_SESSION['idv'];
+            $result = Model::$pdo->prepare($sql);
+            $result->execute();
+            $total_rows = $result->fetchColumn();
+
+            $no_of_records_per_page = 5;
+            $offset = ($page - 1) * $no_of_records_per_page;
+            $v = 0;
+            $tabAlerts = ModelAlerte::selectAlertByVehicle($_SESSION['idv'], $offset, $no_of_records_per_page, $_SESSION['order']);
+            $total_pages = ceil($total_rows / $no_of_records_per_page);
+            if (empty($tabAlerts)) {
+                $v = 1;
+                require_once File::build_path(array("view", "dashboard", "graphs", "ras.php"));
+            } else {
+                foreach ($tabAlerts as $alert) {
+                    $alert->afficher();
+                }
+            }
         } else {
-            foreach ($tabAlerts as $alert) {
-    		    $alert->afficher();
-    		}
+            $v = 1;
+            require_once File::build_path(array("view", "dashboard", "graphs", "ras.php"));
         }
 ?>
     <script type="text/javascript">

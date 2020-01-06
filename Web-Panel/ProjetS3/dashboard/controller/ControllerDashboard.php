@@ -14,10 +14,6 @@ class ControllerDashboard {
         $section_title = 'Alertes';
         $view = 'alerts.php';
         $SESSION['curAct'] = "alert";
-        $sql = "SELECT COUNT(*) FROM `Ap_Alert` WHERE idVehicule=".$_SESSION['idv']; 
-        $result = Model::$pdo->prepare($sql); 
-        $result->execute(); 
-        $total_rows = $result->fetchColumn(); 
         require File::build_path(array('view','mainView.php'));
     }
     

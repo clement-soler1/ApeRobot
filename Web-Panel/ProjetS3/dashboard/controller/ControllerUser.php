@@ -26,7 +26,9 @@ class ControllerUser {
             $_SESSION['userEmail'] = $usr->getEmail();
             $_SESSION['userID'] = $usr->getUserID();
             $car = ModelVehicule::getOneCarByPossesors($usr->getUserID());
-            $_SESSION['idv'] = $car->getIdVehicule();
+            if (!is_null($car)) {
+                $_SESSION['idv'] = $car->getIdVehicule();
+            }
             ControllerDashboard::home();
             
         } else {
@@ -45,7 +47,9 @@ class ControllerUser {
             $_SESSION['userEmail'] = $user->getEmail();
             $_SESSION['userID'] = $user->getUserID();
             $car = ModelVehicule::getOneCarByPossesors($user->getUserID());
-            $_SESSION['idv'] = $car->getIdVehicule();
+            if (!is_null($car)) {
+                $_SESSION['idv'] = $car->getIdVehicule();
+            }
             ControllerDashboard::home();
         } else {
             ControllerUser::showLoginError("connexion","Email ou Mot de passe incorrect !");

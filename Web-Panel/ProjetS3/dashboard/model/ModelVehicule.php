@@ -55,9 +55,12 @@ class ModelVehicule {
     public static function getOneCarByPossesors($idP) {
         
         $tab = ModelVehicule::getVehicleByPossesors($idP);
-        
-        return $tab[0];
-        
+
+        if (count($tab) > 0) {
+            return $tab[0];
+        } else {
+            return null;
+        }
     }
 
     public static function getVehicleById($idv) {

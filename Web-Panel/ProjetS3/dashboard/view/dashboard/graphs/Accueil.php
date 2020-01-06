@@ -57,10 +57,6 @@
     </script>
 
 
-<?php
-	$tabAlerts = ModelAlerte::selectAlertAccueil($_SESSION['idv'], $change);
-
-?>
 <div style="margin: 20px">
 	<form action="index.php?controller=dashboard&action=home" method="post" name="form">
 	 <label for="time">Voir les alertes</label>
@@ -79,7 +75,8 @@
 </script>
   
   <?php
-  if ($data == 0){
+
+  if ($data == 0 || !(isset($_SESSION['idv']))){
     require_once File::build_path(array("view","dashboard","graphs", "ras.php"));
   }
   else{
