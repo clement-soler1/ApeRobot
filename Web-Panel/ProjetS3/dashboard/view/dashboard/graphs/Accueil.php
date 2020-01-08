@@ -26,9 +26,7 @@
             $query = "SELECT COUNT(nombredereleve) as nombredereleve, titre
                          FROM  (SELECT COUNT(*) AS nombredereleve, alr.nomAlerte AS titre
                                 FROM Ap_ReleveAlerte ra
-                                LEFT JOIN Ap_Alerte alr ON ra.typeAlerte = alr.typeAlerte
-                                JOIN Ap_AssociationCapteur ac ON alr.typeAlerte = ac.typeAlerte
-                                JOIN Ap_Capteur cpt ON ac.typeCapteur = cpt.typeCapteur 
+                                JOIN Ap_Alerte alr ON ra.typeAlerte = alr.typeAlerte 
                                 WHERE ra.`idVehicule` = ". $_SESSION['idv'] ." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now()
                                 GROUP BY titre, date, time) tab
                         GROUP BY titre";

@@ -34,16 +34,16 @@ class ModelAlerte {
         //Impossible de faire un PDOStatement avec un order by
         switch ($order) {
             case "1":
-                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv ORDER BY date DESC, time DESC LIMIT :tag_off, :tag_lim;";
+                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv GROUP BY date, time, typeAlerte ORDER BY date DESC, time DESC LIMIT :tag_off, :tag_lim";
                 break;
             case "2":
-                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv ORDER BY niveauAlerte DESC LIMIT :tag_off, :tag_lim;";
+                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv GROUP BY date, time, typeAlerte ORDER BY niveauAlerte DESC LIMIT :tag_off, :tag_lim";
                 break;
             case "3":
-                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv ORDER BY nomAlerte LIMIT :tag_off, :tag_lim;";
+                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv GROUP BY date, time, typeAlerte ORDER BY nomAlerte LIMIT :tag_off, :tag_lim";
                 break;
             default:
-                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv ORDER BY date DESC, time DESC LIMIT :tag_off, :tag_lim;";
+                $sql = $req_base . " WHERE ra.`idVehicule`=:tag_idv GROUP BY date, time, typeAlerte ORDER BY date DESC, time DESC LIMIT :tag_off, :tag_lim";
                 break;
         }
 
@@ -86,17 +86,14 @@ class ModelAlerte {
     }
 
     public function rankToColor() {
-        switch ($this->niveauAlerte) {
+        switch ($this->niveauAlerte) { 
             case 1:
-                return  "alerteVerte";
-                
-            case 2:
                 return  "alerteJaune";
                 
-            case 3:
+            case 2:
                 return  "alerteOrange";
                  
-            case 4:
+            case 3:
                 return  "alerteRouge";
 
             default:
