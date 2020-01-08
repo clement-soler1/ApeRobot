@@ -40,15 +40,15 @@
   <?php
   echo '<main>';
     echo '<div class="title">';
-      echo '<h2>'. $section_title .'</h2>';
+      echo '<h2>'. htmlspecialchars($section_title) .'</h2>';
       echo '<div class="flexRow">';
-      echo '<select onchange=\'setCurVeh(this.value,"'. $SESSION['curAct'] .'")\' class="selVeh">';
+      echo '<select onchange=\'setCurVeh(this.value,"'. htmlspecialchars($SESSION['curAct']) .'")\' class="selVeh">';
             $tav = ModelVehicule::getVehicleByPossesors($_SESSION["userID"]);
             foreach ($tav as $v) {
                 if ($v->getIdVehicule() == $_SESSION['idv']) {
-                    echo '<option selected value="'. $v->getIdVehicule() .'">'. $v->getSurnom() .'</option>';
+                    echo '<option selected value="'. htmlspecialchars($v->getIdVehicule()) .'">'. htmlspecialchars($v->getSurnom()) .'</option>';
                 } else {
-                    echo '<option value="'. $v->getIdVehicule() .'">'. $v->getSurnom() .'</option>';
+                    echo '<option value="'. htmlspecialchars($v->getIdVehicule()) .'">'. htmlspecialchars($v->getSurnom()) .'</option>';
                 }
             }
       
@@ -56,7 +56,7 @@
       echo '</select>';
       
       $usr = ModelUser::getUserByEmail($_SESSION['userEmail']);
-      echo '<a href="index.php?controller=dashboard&action=account" class="btnNav"><i class="material-icons">person</i>Hello '. $usr->getPrenom() .'</a>';
+      echo '<a href="index.php?controller=dashboard&action=account" class="btnNav"><i class="material-icons">person</i>Hello '. htmlspecialchars($usr->getPrenom()) .'</a>';
     echo '</div>';
     echo '</div>';
     

@@ -5,16 +5,16 @@
 $usr = ModelUser::getUserByEmail($_SESSION['userEmail']);
 echo '<div class="account-card">';
     echo '<img class="acctI" src="./view/icons/account_info.png">';
-    echo '<h1 class="acct-name">'. ucfirst($usr->getPrenom()) .' '. ucfirst($usr->getNom()) .'</h1>';
-    echo '<p class="txtCentered"><b>E-mail : </b>'. $usr->getEmail() .'</p>';
-    echo '<p class="txtCentered"><b>Date de Naissance :</b> '. $usr->getDateNaissance() .'</p>';
-    echo '<p class="txtCentered"><b>Téléphone :</b> '. $usr->printTel() .'</p>';
+    echo '<h1 class="acct-name">'. ucfirst(htmlspecialchars($usr->getPrenom())) .' '. ucfirst(htmlspecialchars($usr->getNom())) .'</h1>';
+    echo '<p class="txtCentered"><b>E-mail : </b>'. htmlspecialchars($usr->getEmail()) .'</p>';
+    echo '<p class="txtCentered"><b>Date de Naissance :</b> '. htmlspecialchars($usr->getDateNaissance()) .'</p>';
+    echo '<p class="txtCentered"><b>Téléphone :</b> '. htmlspecialchars($usr->printTel()) .'</p>';
     echo '<br>';
     echo '<p class="txtCentered"><b>Véhicules créés :</b></p>';
-    echo '<p class="txtCentered">'. $usr->printCreatedVehicle() .'</p>';
+    echo '<p class="txtCentered">'. htmlspecialchars($usr->printCreatedVehicle()) .'</p>';
     echo '<br>';
     echo '<p class="txtCentered"><b>Véhicules Accesibles :</b></p>';
-    echo '<p class="txtCentered">'. $usr->printAuthorizedVehicle() .'</p>';
+    echo '<p class="txtCentered">'. htmlspecialchars($usr->printAuthorizedVehicle()) .'</p>';
     echo '<br>';
 echo '</div>';
 ?>

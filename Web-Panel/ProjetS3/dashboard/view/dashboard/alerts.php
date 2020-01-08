@@ -54,7 +54,7 @@
         }
 ?>
     <script type="text/javascript">
-    document.getElementById('ordre').value = <?= $_SESSION['order'] ?>;
+    document.getElementById('ordre').value = <?= htmlspecialchars($_SESSION['order']) ?>;
     </script>
 
 

@@ -2,7 +2,7 @@
 	session_start();
 
 	$con = mysqli_connect('webinfo.iutmontp.univ-montp2.fr','sornayj','<wxcvbn,;:!123','sornayj');
-
+ 	$con->set_charset("utf8");
 	$num = 0;
 	$sql = "SELECT rel.`date`, rel.`time`, vhc.`marque`, vhc.`modele`, vhc.`immatriculation`, cpt.`nomCapteur`, dat.`donnee`
 							  FROM Ap_Releve rel

@@ -27,7 +27,7 @@
                          FROM  (SELECT COUNT(*) AS nombredereleve, alr.nomAlerte AS titre
                                 FROM Ap_ReleveAlerte ra
                                 JOIN Ap_Alerte alr ON ra.typeAlerte = alr.typeAlerte 
-                                WHERE ra.`idVehicule` = ". $_SESSION['idv'] ." AND `date` BETWEEN date_sub(now(),INTERVAL ".$change.") AND now()
+                                WHERE ra.`idVehicule` = ". htmlspecialchars($_SESSION['idv']) ." AND `date` BETWEEN date_sub(now(),INTERVAL ".htmlspecialchars($change).") AND now()
                                 GROUP BY titre, date, time) tab
                         GROUP BY titre";
 
@@ -35,7 +35,7 @@
 
             if(mysqli_num_rows($exec)){
                 while($row = mysqli_fetch_array($exec)){
-                    echo "['". $row['titre'] ."', ".$row['nombredereleve']."],";
+                    echo "['". htmlspecialchars($row['titre']) ."', ".htmlspecialchars($row['nombredereleve'])."],";
                 }
                 $data = 1;
             }
@@ -73,7 +73,7 @@
 </div>
 
 <script type="text/javascript">
-	document.getElementById('change').value = '<?= $change ?>';
+	document.getElementById('change').value = '<?= htmlspecialchars($change) ?>';
 </script>
   
   <?php

@@ -44,7 +44,7 @@
 			['Date du relevé', 'Donnée'],
 TEXT;
 	    	while($row = $req_prep->fetch(PDO::FETCH_ASSOC)){
-	           	echo "['". $row['date'].' '. $row['time'] ."', ".$row['donnee']."],";
+	           	echo "['". htmlspecialchars($row['date']).' '. htmlspecialchars($row['time']) ."', ".htmlspecialchars($row['donnee'])."],";
 	        }
 		    echo <<<TEXT
 			]);
