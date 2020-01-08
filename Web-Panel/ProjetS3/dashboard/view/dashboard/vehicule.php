@@ -24,16 +24,21 @@
 
             echo '<div class="divBtn">';
             if ($veh->getIdCreateur() == $_SESSION['userID']) {
-                echo '<a class="btnPartager">Partager</a>';
-                echo '<a class="btnUpdate">Modifier</a>';
-                echo '<a class="btnDelete">Supprimer</a>';
+                echo '<a class="btnPartager" href="./index.php?controller=vehicule&action=share">Partager</a>';
+                echo '<a class="btnUpdate" href="./index.php?controller=vehicule&action=update">Modifier</a>';
+                echo '<a class="btnDelete" href="./index.php?controller=vehicule&action=delete&idv='. $_SESSION['idv'] .'">Supprimer</a>';
             };
-            echo '<a class="btnNew">Nouveau</a>';
+            echo '<a class="btnNew" href="./index.php?controller=vehicule&action=createVehicule">Nouveau</a>';
 
 
             echo '</div>';
         } else {
-            echo '<h1>Vouys n\'avez aucun véhicule !</h1>';
+            echo '<h1>Vouys n\'avez aucuns véhicule !</h1>';
+            echo '<br>';
+            echo '<div class="divBtn">';
+            echo '<a class="btnNew" href="./index.php?controller=vehicule&action=createVehicule">Nouveau</a>';
+            echo '</div>';
+
         }
     ?>
 

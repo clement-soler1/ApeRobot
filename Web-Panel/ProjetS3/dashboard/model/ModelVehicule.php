@@ -146,13 +146,87 @@ class ModelVehicule {
         return $this->idCreateur;
     }
 
+    public static function generateID() {
 
+        $sql = "SELECT MAX(idVehicule) FROM Ap_Vehicule;";
 
+        $req_prep = Model::$pdo->prepare($sql);
 
+        $req_prep->execute();
+        $tab = $req_prep->fetch();
 
+        return ($tab[0] + 1);
 
-    
-    
+    }
+
+    public function save() {
+        $sql = "INSERT INTO `Ap_Vehicule` (`idVehicule`, `marque`, `modele`, `couleur`, `immatriculation`, `surnom`, `idCreateur`) VALUES (:tag_idv, :tag_mq, :tag_md, :tag_col, :tag_immat, :tag_sn, :tag_idc);";
+
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "tag_idv" => $this->idVehicule,
+            "tag_mq" => $this->marque,
+            "tag_md" => $this->modele,
+            "tag_col" => $this->couleur,
+            "tag_immat" => $this->immatriculation,
+            "tag_sn" => $this->surnom,
+            "tag_idc" => $this->idCreateur,
+        );
+
+        $req_prep->execute($values);
+
+        $sql2 = "INSERT INTO Ap_PossesVehicule (idUser,idVehicule) VALUES (:tag_idu, :tag_idv);";
+        $req_prep2 = Model::$pdo->prepare($sql2);
+        $values2 = array(
+            "tag_idv" => $this->idVehicule,
+            "tag_idu" => $this->idCreateur,
+        );
+        $req_prep2->execute($values2);
+    }
+
+    /**
+     * @return null
+     */
+    public function getImmatriculation()
+    {
+        return $this->immatriculation;
+    }
+
+    public function update($mq,$mo,$col,$immat,$sn) {
+        $sql = "UPDATE `Ap_Vehicule` SET `marque`=:tag_mq,`modele`=:tag_md,`couleur`=:tag_col,`immatriculation`=:tag_immat,`surnom`=:tag_sn WHERE `idVehicule`=:tag_idv;";
+
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "tag_mq" => $mq,
+            "tag_md" => $mo,
+            "tag_col" => $col,
+            "tag_immat" => $immat,
+            "tag_sn" => $sn,
+            "tag_idv" => $this->idVehicule,
+        );
+
+        $req_prep->execute($values);
+    }
+
+    public function partage($idu) {
+        $sql2 = "INSERT INTO Ap_PossesVehicule (idUser,idVehicule) VALUES (:tag_idu, :tag_idv);";
+        $req_prep2 = Model::$pdo->prepare($sql2);
+        $values2 = array(
+            "tag_idv" => $this->idVehicule,
+            "tag_idu" => $idu,
+        );
+        $req_prep2->execute($values2);
+    }
+
+    public function delete($idv) {
+        $sql = "DELETE FROM `Ap_Vehicule` WHERE `idVehicule`=:tag_idv; DELETE FROM `Ap_PossesVehicule` WHERE `idVehicule`=:tag_idv;";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values['tag_idv'] = $idv;
+        $req_prep->execute($values);
+    }
+
 }
 
 ?>

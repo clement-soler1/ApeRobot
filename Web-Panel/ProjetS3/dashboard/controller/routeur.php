@@ -1,5 +1,7 @@
 <?php
 require_once File::build_path(array("controller","ControllerUser.php"));
+require_once File::build_path(array("controller","ControllerDashboard.php"));
+require_once File::build_path(array("controller","ControllerVehicule.php"));
 
 if (isset($_REQUEST['action'])) {
 // On recupère l'action passée dans l'URL

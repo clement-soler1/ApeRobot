@@ -81,3 +81,23 @@
     background-color: dodgerblue;
     color: black;
 }
+
+.divInput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.divInput > p {
+    margin-right: 2vw;
+}
+
+input {
+    border-radius: 3px;
+}
+
+.sbmt {
+    width: 7vw;
+    background-color: green;
+}
