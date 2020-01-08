@@ -1,5 +1,6 @@
 ## -*- coding: utf-8 -*-
 import Alerte
+import os
 
 def alerteProcess(listOfSensor):
     listAlerteObj = []
@@ -30,21 +31,23 @@ def alerteProcess(listOfSensor):
     
     if (maxAlerteAccel > 1 and maxAlerteGyro > 1):
         if (maxAlerteAccel > maxAlerteGyro):
-            listAlerteObj.append(Alerte.Alerte(1, maxAlerteAccel, listOfSensor[0].getList()[1][indexAlerteAccel], listOfSensor[0].getList()[2][indexAlerteAccel]))
+            listAlerteObj.append(Alerte.Alerte(1, maxAlerteAccel, listOfSensor[0].getList()[1][indexAlerteAccel], listOfSensor[0].getList()[2][indexAlerteAccel],"Crash"))
         else:
-            listAlerteObj.append(Alerte.Alerte(1, maxAlerteGyro, listOfSensor[2].getList()[1][indexAlerteGyro], listOfSensor[2].getList()[2][indexAlerteGyro]))
-            
+            listAlerteObj.append(Alerte.Alerte(1, maxAlerteGyro, listOfSensor[2].getList()[1][indexAlerteGyro], listOfSensor[2].getList()[2][indexAlerteGyro], "Crash"))
+        os.system("python3 /home/pi/ofono/test/dial-number 0651984203")
         if (maxAlerteLight > 0):
             listAlerteObj.append(Alerte.Alerte(5, maxAlerteLight, listOfSensor[7].getList()[1][indexAlerteLight], listOfSensor[7].getList()[2][indexAlerteLight]))
             
     if (maxAlerteDist == 2 or (maxAlerteDist > 0 and maxAlerteAccel > 1)):
-        listAlerteObj.append(Alerte.Alerte(2, maxAlerteDist, listOfSensor[4].getList()[1][indexAlerteDist], listOfSensor[4].getList()[2][indexAlerteDist]))
+        listAlerteObj.append(Alerte.Alerte(2, maxAlerteDist, listOfSensor[4].getList()[1][indexAlerteDist], listOfSensor[4].getList()[2][indexAlerteDist],"Collision"))
+        if (maxAlerteLight > 0):
+            listAlerteObj.append(Alerte.Alerte(5, maxAlerteLight, listOfSensor[7].getList()[1][indexAlerteLight], listOfSensor[7].getList()[2][indexAlerteLight]), "Luminosité")
     
     if (maxAlerteTemp > 0):
-        listAlerteObj.append(Alerte.Alerte(3, maxAlerteTemp, listOfSensor[5].getList()[1][indexAlerteTemp], listOfSensor[5].getList()[2][indexAlerteTemp]))
+        listAlerteObj.append(Alerte.Alerte(3, maxAlerteTemp, listOfSensor[5].getList()[1][indexAlerteTemp], listOfSensor[5].getList()[2][indexAlerteTemp],"Température"))
     
     if (maxAlerteBruit > 0):
-        listAlerteObj.append(Alerte.Alerte(4, maxAlerteBruit, listOfSensor[6].getList()[1][indexAlerteBruit], listOfSensor[6].getList()[2][indexAlerteBruit]))
+        listAlerteObj.append(Alerte.Alerte(4, maxAlerteBruit, listOfSensor[6].getList()[1][indexAlerteBruit], listOfSensor[6].getList()[2][indexAlerteBruit],"Bruit"))
     
     return listAlerteObj
     

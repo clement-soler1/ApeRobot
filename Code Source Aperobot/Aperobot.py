@@ -32,14 +32,21 @@ while True:
             sensor.retrieveData()
 
         end = time.time() - startRetrieveData
-        #print("TIME :" + str(end) + "\n")
+        print("RETRIEVE DATA TIME :" + str(end) + "\n")
         if (end < 1):
             time.sleep(1 - end)
         i += 1
 
     # |3| Traitement et récupération liste d'alerte
+    startRetrieveData = time.time()
     listAl = processings.alerteProcess(listOfSensor)
-
+    end = time.time() - startRetrieveData
+    print("PROCESS TIME :" + str(end) + "\n")
+    for al in listAl:
+        print(al.toString())
 
     # |4| Enregistrer DATA
+    startRetrieveData = time.time()
     GestionFichier.saveData(listOfSensor, listAl)
+    end = time.time() - startRetrieveData
+    print("SAVE TIME :" + str(end) + "\n")
